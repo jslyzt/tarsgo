@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/TarsCloud/TarsGo/tars"
+	"tarsgo/tars"
 )
 
 func main() { //Init servant

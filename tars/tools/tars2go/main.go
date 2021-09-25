@@ -40,7 +40,7 @@ func printhelp() {
 func main() {
 	flag.Usage = printhelp
 	flag.Var(&gImports, "I", "Specify a specific import path")
-	flag.StringVar(&gTarsPath, "tarsPath", "github.com/TarsCloud/TarsGo/tars", "Specify the tars source path.")
+	flag.StringVar(&gTarsPath, "tarsPath", "tarsgo/tars", "Specify the tars source path.")
 	flag.StringVar(&gOutdir, "outdir", "", "which dir to put generated code")
 	flag.StringVar(&gModule, "module", "", "current go module path")
 	flag.Parse()
@@ -49,7 +49,7 @@ func main() {
 		printhelp()
 		os.Exit(0)
 	}
-	
+
 	for _, filename := range flag.Args() {
 		gen := NewGenGo(filename, gModule, gOutdir)
 		gen.I = gImports

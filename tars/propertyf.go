@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/propertyf"
-	"github.com/TarsCloud/TarsGo/tars/util/tools"
+	"tarsgo/tars/protocol/res/propertyf"
+	"tarsgo/tars/util/tools"
 )
 
 // ReportPolicy is report policy

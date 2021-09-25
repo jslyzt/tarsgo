@@ -6,4 +6,4 @@ go:
 install:
   - echo "$GOPATH"
 script:
-  - go build github.com/TarsCloud/TarsGo/tars
+  - go build tarsgo/tars

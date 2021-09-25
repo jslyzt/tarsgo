@@ -3,7 +3,7 @@ package tars
 import (
 	"path/filepath"
 
-	"github.com/TarsCloud/TarsGo/tars/util/rogger"
+	"tarsgo/tars/util/rogger"
 )
 
 // GetLogger Get a logger

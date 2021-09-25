@@ -6,12 +6,12 @@ tars基础组件安装参考[部署](https://github.com/TarsCloud/Tars/tree/mast
 
 Golang环境准备，tarsgo要求golang版本在1.9.x及以上。
 
-安装tars： `go get github.com/TarsCloud/TarsGo/tars `
+安装tars： `go get tarsgo/tars `
 
 编译tars协议转Golang工具：
 
 ```shell
-cd $GOPATH/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go && go build . 
+cd $GOPATH/src/tarsgo/tars/tools/tars2go && go build . 
 
 cp tars2go $GOPATH/bin/
 ```
@@ -84,16 +84,16 @@ TARS管理系统的菜单树下，有以下功能：
 运行create_tars_server.sh脚本，自动创建服务必须的文件, 执行过程中如果出现语法错误尝试使用`dos2unix create_tars_server.sh`进行转码。
 
 ```shell
-chmod +x $GOPATH/src/github.com/TarsCloud/TarsGo/tars/tools/create_tars_server.sh
-$GOPATH/src/github.com/TarsCloud/TarsGo/tars/tools/create_tars_server.sh [App] [Server] [Servant]
+chmod +x $GOPATH/src/tarsgo/tars/tools/create_tars_server.sh
+$GOPATH/src/tarsgo/tars/tools/create_tars_server.sh [App] [Server] [Servant]
 例如： 
-$GOPATH/src/github.com/TarsCloud/TarsGo/tars/tools/create_tars_server.sh TestApp HelloGo SayHello
+$GOPATH/src/tarsgo/tars/tools/create_tars_server.sh TestApp HelloGo SayHello
 ```
 
 命令执行后将生成代码至GOPATH中，并以`APP/Server`命名目录，生成代码中也有提示具体路径。
 
 ```shell
-[root@1-1-1-1 ~]# sh $GOPATH/src/github.com/TarsCloud/TarsGo/tars/tools/create_tars_server.sh TestApp HelloGo SayHello
+[root@1-1-1-1 ~]# sh $GOPATH/src/tarsgo/tars/tools/create_tars_server.sh TestApp HelloGo SayHello
 [create server: TestApp.HelloGo ...]
 [mkdir: $GOPATH/src/TestApp/HelloGo/]
 >>>Now doing:./start.sh >>>>
@@ -163,7 +163,7 @@ cat  $GOPATH/src/TestApp/HelloGo/HelloGo.go
 package main
 
 import (
-	"github.com/TarsCloud/TarsGo/tars"
+	"tarsgo/tars"
 
 	"TestApp"
 )
@@ -192,7 +192,7 @@ package main
 
 import (
         "fmt"
-        "github.com/TarsCloud/TarsGo/tars"
+        "tarsgo/tars"
 
         "TestApp"
 )
@@ -250,7 +250,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/TarsCloud/TarsGo/tars"
+	"tarsgo/tars"
 )
 
 func main() {

@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/TarsCloud/TarsGo/tars/transport"
+	"tarsgo/tars/transport"
 )
 
 //AddServant add dispatch and interface for object.

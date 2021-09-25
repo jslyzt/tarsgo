@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/TarsCloud/TarsGo/tars"
+	"tarsgo/tars"
 
 	"StressTest"
 	"runtime/pprof"

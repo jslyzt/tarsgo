@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/TarsCloud/TarsGo/tars/transport"
+	"tarsgo/tars/transport"
 )
 
 // CustomProtocolImp str protocol object implements ServerProtocol interface
@@ -30,7 +30,7 @@ func (s *CustomProtocolImp) ParsePackage(buff []byte) (int, int) {
 	return 0, transport.PACKAGE_LESS
 }
 
-// Invoke process request and send response 
+// Invoke process request and send response
 func (s *CustomProtocolImp) Invoke(ctx context.Context, req []byte) []byte {
 	fmt.Println("req:", req)
 	reqMap, err := url.ParseQuery(strings.TrimSpace(string(req)))

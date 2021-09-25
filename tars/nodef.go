@@ -3,7 +3,7 @@ package tars
 import (
 	"os"
 
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/nodef"
+	"tarsgo/tars/protocol/res/nodef"
 )
 
 // NodeFHelper is helper struct.

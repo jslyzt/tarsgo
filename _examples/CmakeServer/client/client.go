@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/TarsCloud/TarsGo/tars"
+	"tarsgo/tars"
 
 	"CmakeServer/tars-protocol/StressTest"
 )

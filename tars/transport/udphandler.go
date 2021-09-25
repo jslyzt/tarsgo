@@ -7,9 +7,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/basef"
-	"github.com/TarsCloud/TarsGo/tars/util/current"
-	"github.com/TarsCloud/TarsGo/tars/util/grace"
+	"tarsgo/tars/protocol/res/basef"
+	"tarsgo/tars/util/current"
+	"tarsgo/tars/util/grace"
 )
 
 type udpHandler struct {

@@ -17,14 +17,14 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/TarsCloud/TarsGo/tars/protocol"
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/adminf"
-	"github.com/TarsCloud/TarsGo/tars/transport"
-	"github.com/TarsCloud/TarsGo/tars/util/conf"
-	"github.com/TarsCloud/TarsGo/tars/util/endpoint"
-	"github.com/TarsCloud/TarsGo/tars/util/grace"
-	"github.com/TarsCloud/TarsGo/tars/util/rogger"
-	"github.com/TarsCloud/TarsGo/tars/util/tools"
+	"tarsgo/tars/protocol"
+	"tarsgo/tars/protocol/res/adminf"
+	"tarsgo/tars/transport"
+	"tarsgo/tars/util/conf"
+	"tarsgo/tars/util/endpoint"
+	"tarsgo/tars/util/grace"
+	"tarsgo/tars/util/rogger"
+	"tarsgo/tars/util/tools"
 )
 
 var tarsConfig map[string]*transport.TarsServerConf

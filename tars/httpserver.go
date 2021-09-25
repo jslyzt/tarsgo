@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/statf"
+	"tarsgo/tars/protocol/res/statf"
 )
 
 var realIPHeader []string

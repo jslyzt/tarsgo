@@ -6,11 +6,11 @@ package propertyf
 import (
 	"context"
 	"fmt"
-	m "github.com/TarsCloud/TarsGo/tars/model"
-	"github.com/TarsCloud/TarsGo/tars/protocol/codec"
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/requestf"
-	"github.com/TarsCloud/TarsGo/tars/util/current"
-	"github.com/TarsCloud/TarsGo/tars/util/tools"
+	m "tarsgo/tars/model"
+	"tarsgo/tars/protocol/codec"
+	"tarsgo/tars/protocol/res/requestf"
+	"tarsgo/tars/util/current"
+	"tarsgo/tars/util/tools"
 )
 
 //PropertyF struct

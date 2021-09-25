@@ -1,6 +1,6 @@
 package tars
 
-import "github.com/TarsCloud/TarsGo/tars/protocol/res/endpointf"
+import "tarsgo/tars/protocol/res/endpointf"
 
 var (
 	appCache AppCache

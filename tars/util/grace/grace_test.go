@@ -7,6 +7,10 @@ import (
 	"testing"
 )
 
+const (
+	ListenFdPrefix = ":"
+)
+
 func TestListener(t *testing.T) {
 	proto, addr := "tcp", "localhost:3333"
 	_, err := CreateListener(proto, addr)

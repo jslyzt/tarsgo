@@ -1,3 +1,3 @@
-module github.com/TarsCloud/TarsGo/tars/_examples/CustomProtoServer
+module tarsgo/tars/_examples/CustomProtoServer
 
 go 1.12

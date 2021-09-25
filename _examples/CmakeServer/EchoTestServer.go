@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/TarsCloud/TarsGo/tars"
+	"tarsgo/tars"
 
 	"CmakeServer/tars-protocol/StressTest"
 	"runtime/pprof"

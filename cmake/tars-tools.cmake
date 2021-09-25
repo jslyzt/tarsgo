@@ -2,9 +2,9 @@
 
 execute_process(COMMAND go env GOPATH OUTPUT_VARIABLE GOPATH)
 string(REGEX REPLACE "\n$" "" GOPATH "${GOPATH}")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GOPATH}/src/github.com/TarsCloud/TarsGo/cmake")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GOPATH}/src/tarsgo/cmake")
 
-include(${GOPATH}/src/github.com/TarsCloud/TarsGo/cmake/golang.cmake)
+include(${GOPATH}/src/tarsgo/cmake/golang.cmake)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

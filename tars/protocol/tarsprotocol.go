@@ -2,14 +2,13 @@ package protocol
 
 import (
 	"encoding/binary"
-	"github.com/TarsCloud/TarsGo/tars/protocol/codec"
-	"github.com/TarsCloud/TarsGo/tars/protocol/res/requestf"
+	"tarsgo/tars/protocol/codec"
+	"tarsgo/tars/protocol/res/requestf"
 )
-
 
 var maxPackageLength int = 10485760
 
-// SetMaxPackageLength sets the max length of tars packet 
+// SetMaxPackageLength sets the max length of tars packet
 func SetMaxPackageLength(len int) {
 	maxPackageLength = len
 }
@@ -28,7 +27,7 @@ func TarsRequest(rev []byte) (int, int) {
 	return iHeaderLen, PACKAGE_FULL
 }
 
-type TarsProtocol struct {}
+type TarsProtocol struct{}
 
 func (p *TarsProtocol) RequestPack(req *requestf.RequestPacket) ([]byte, error) {
 	os := codec.NewBuffer()

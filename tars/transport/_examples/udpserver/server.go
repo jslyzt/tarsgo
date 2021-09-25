@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/TarsCloud/TarsGo/tars/transport"
+	"tarsgo/tars/transport"
 )
 
 // MyServer testing tars udp server
@@ -48,8 +48,8 @@ func (s *MyServer) InvokeTimeout(pkg []byte) []byte {
 
 func main() {
 	conf := &transport.TarsServerConf{
-		Proto:   "udp",
-		Address: "127.0.0.1:3333",
+		Proto:         "udp",
+		Address:       "127.0.0.1:3333",
 		MaxInvoke:     20,
 		AcceptTimeout: time.Millisecond * 500,
 		ReadTimeout:   time.Millisecond * 100,

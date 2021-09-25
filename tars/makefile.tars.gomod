@@ -51,7 +51,7 @@ $(TARGET): TARSBUILD $(GO_SRC)
 ifneq ($(strip $(TARS_SRC)),)
 TARSBUILD: $(TARS_SRC)
 	@echo "install $(TARS2GO)..."	
-	#go get github.com/TarsCloud/TarsGo/tars/tools/tars2go && go install github.com/TarsCloud/TarsGo/tars/tools/tars2go
+	#go get tarsgo/tars/tools/tars2go && go install tarsgo/tars/tools/tars2go
 	@echo -e "\e[33;1m$(TARS2GO)\e[0m \e[36;1m ${TARS_SRC} \e[0m..."
 	$(TARS2GO) $(J2GO_FLAG) $(TARS_SRC)
 else
