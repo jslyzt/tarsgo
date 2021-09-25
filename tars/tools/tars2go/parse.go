@@ -1,4 +1,4 @@
-package main
+package tars2go
 
 import (
 	"fmt"
@@ -638,7 +638,7 @@ func (p *Parse) findEnumName(ename string) (*EnumMember, *EnumInfo) {
 		}
 	}
 	if cenum != nil && cenum.Module == "" {
-		if *gModuleCycle == true {
+		if *gModuleCycle {
 			cenum.Module = p.ProtoName + "_" + p.Module
 		} else {
 			cenum.Module = p.Module
@@ -674,7 +674,7 @@ func (p *Parse) checkDepTName(ty *VarType, dm *map[string]bool, dmj *map[string]
 		if ty.CType == tkName {
 			p.parseErr(ty.TypeSt + " not find define")
 		}
-		if *gModuleCycle == true {
+		if *gModuleCycle {
 			if mod != p.Module || protoName != p.ProtoName {
 				var modStr string
 				if *gModuleUpper {
@@ -741,7 +741,7 @@ func (p *Parse) analyzeDefault() {
 				}
 				defValue := enum.Name + "_" + upperFirstLetter(mb.Key)
 				var currModule string
-				if *gModuleCycle == true {
+				if *gModuleCycle {
 					currModule = p.ProtoName + "_" + p.Module
 				} else {
 					currModule = p.Module

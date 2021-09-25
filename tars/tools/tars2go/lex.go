@@ -1,4 +1,4 @@
-package main
+package tars2go
 
 import (
 	"bytes"

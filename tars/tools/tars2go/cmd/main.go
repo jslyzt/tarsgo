@@ -1,7 +1,3 @@
-//
-// tars2go
-//
-
 package main
 
 import (
@@ -9,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	g "tarsgo/tars/tools/tars2go"
 )
 
 type importPath []string
@@ -22,10 +19,12 @@ func (t *importPath) Set(value string) error {
 	return nil
 }
 
-var gImports importPath
-var gTarsPath string
-var gOutdir string
-var gModule string
+var (
+	gImports  importPath
+	gTarsPath string
+	gOutdir   string
+	gModule   string
+)
 
 func printhelp() {
 	bin := os.Args[0]
@@ -41,7 +40,7 @@ func main() {
 	flag.Usage = printhelp
 	flag.Var(&gImports, "I", "Specify a specific import path")
 	flag.StringVar(&gTarsPath, "tarsPath", "tarsgo/tars", "Specify the tars source path.")
-	flag.StringVar(&gOutdir, "outdir", "", "which dir to put generated code")
+	flag.StringVar(&g.GOutdir, "outdir", "", "which dir to put generated code")
 	flag.StringVar(&gModule, "module", "", "current go module path")
 	flag.Parse()
 
@@ -51,9 +50,9 @@ func main() {
 	}
 
 	for _, filename := range flag.Args() {
-		gen := NewGenGo(filename, gModule, gOutdir)
+		gen := g.NewGenGo(filename, gModule, gOutdir)
 		gen.I = gImports
-		gen.tarsPath = gTarsPath
+		gen.TarsPath = gTarsPath
 		gen.Gen()
 	}
 }
