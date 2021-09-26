@@ -355,7 +355,7 @@ func (ls *LexState) readDesc() (TK, *SemInfo) {
 			if btdescs == nil {
 				if ls.current == gsdesc[0] {
 					seriesNum = 0
-				} else if lstbyte == gsdesc[seriesNum] {
+				} else if seriesNum >= 0 && lstbyte == gsdesc[seriesNum] {
 					seriesNum++
 				}
 				if seriesNum >= len(gsdesc)-1 && ls.current == ':' {
