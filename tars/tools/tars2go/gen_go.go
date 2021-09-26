@@ -13,6 +13,8 @@ import (
 )
 
 var (
+	GTarsPath = flag.String("tarsPath", "github.com/TarsCloud/TarsGo/tars", "Specify the tars source path.")
+
 	gE               = flag.Bool("E", false, "Generate code before fmt for troubleshooting")
 	gAddServant      = flag.Bool("add-servant", true, "Generate AddServant function")
 	gModuleCycle     = flag.Bool("module-cycle", false, "support jce module cycle include(do not support jce file cycle include)")
@@ -21,7 +23,6 @@ var (
 	dispatchReporter = flag.Bool("dispatch-reporter", false, "Dispatch reporter support")
 
 	gFileMap map[string]bool
-	GOutdir  string
 )
 
 func init() {
@@ -485,7 +486,7 @@ func (gen *GenGo) genStructDefine(st *StructInfo) {
 			c.WriteString("json:\"" + v.OriginKey + "\"")
 		}
 		if len(v.Desc) > 0 {
-			c.WriteString(v.Desc)
+			c.WriteString(" " + v.Desc)
 		}
 		c.WriteString("`\n")
 	}
@@ -1068,7 +1069,7 @@ func (gen *GenGo) genInclude(ps []*Parse) {
 			Path:      v.Source,
 			Module:    gen.Module,
 			Prefix:    gen.Prefix,
-			TarsPath:  GOutdir,
+			TarsPath:  *GTarsPath,
 			ProtoName: path2ProtoName(v.Source),
 		}
 		gen2.P = v

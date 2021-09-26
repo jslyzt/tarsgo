@@ -335,11 +335,16 @@ func (ls *LexState) llexDefault() (TK, *SemInfo) {
 	}
 }
 
+var (
+	gsdesc = []byte("desc:")
+)
+
 func (ls *LexState) readDesc() (TK, *SemInfo) {
 	var (
-		ndesc, ninc = 0, -1
-		lpos, rpos  = -1, -1
-		btdescs     []byte
+		lpos, rpos = -1, -1
+		btdescs    []byte
+		lstbyte    byte
+		seriesNum  int = -1
 	)
 	for {
 		switch ls.current {
@@ -347,21 +352,24 @@ func (ls *LexState) readDesc() (TK, *SemInfo) {
 			ls.next()
 			goto end
 		case 'd', 'e', 's', 'c', ':':
-			if ninc < 0 {
-				ninc = 0
-				btdescs = make([]byte, 0)
+			if btdescs == nil {
+				if ls.current == gsdesc[0] {
+					seriesNum = 0
+				} else if lstbyte == gsdesc[seriesNum] {
+					seriesNum++
+				}
+				if seriesNum >= len(gsdesc)-1 && ls.current == ':' {
+					btdescs = make([]byte, 0)
+				}
+				lstbyte = ls.current
+				ls.next()
+				continue
 			}
-			if ninc == 0 {
-				ndesc++
-			}
-			ls.next()
+			fallthrough
 		case ' ', '\t', '\f', '\v':
 			fallthrough
 		default:
-			if ninc >= 0 {
-				ninc++
-			}
-			if ndesc >= 5 && btdescs != nil {
+			if btdescs != nil {
 				btdescs = append(btdescs, ls.current)
 				if ls.current == '[' {
 					lpos = len(btdescs) - 1
@@ -369,6 +377,7 @@ func (ls *LexState) readDesc() (TK, *SemInfo) {
 					rpos = len(btdescs) - 1
 				}
 			}
+			lstbyte = ls.current
 			ls.next()
 		}
 	}

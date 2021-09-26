@@ -165,7 +165,7 @@ func (p *Parse) expect(t TK) {
 
 func (p *Parse) makeUnsigned(utype *VarType) {
 	switch utype.Type {
-	case tkTInt, tkTShort, tkTByte:
+	case tkTLong, tkTInt, tkTShort, tkTByte:
 		utype.Unsigned = true
 	default:
 		p.parseErr("type " + TokenMap[utype.Type] + " unsigned decoration is not supported")
