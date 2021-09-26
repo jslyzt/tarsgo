@@ -21,7 +21,7 @@ func (t *importPath) Set(value string) error {
 
 var (
 	gImports  importPath
-	gTarsPath = flag.String("tarsPath", "tarsgo/tars", "Specify the tars source path.")
+	gTarsPath = flag.String("tarsPath", "github.com/TarsCloud/TarsGo/tars", "Specify the tars source path.")
 	gModule   = flag.String("module", "", "current go module path")
 )
 
