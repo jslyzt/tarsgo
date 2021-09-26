@@ -64,6 +64,9 @@ const (
 	tkString
 	tkInteger
 	tkFloat
+
+	//desc
+	tkDesc
 )
 
 //TokenMap record token  value.
@@ -116,6 +119,8 @@ var TokenMap = [...]string{
 	tkString:  "<string>",
 	tkInteger: "<INTEGER>",
 	tkFloat:   "<FLOAT>",
+	// desc
+	tkDesc: "desc",
 }
 
 //SemInfo is struct.
@@ -330,6 +335,74 @@ func (ls *LexState) llexDefault() (TK, *SemInfo) {
 	}
 }
 
+func (ls *LexState) readDesc() (TK, *SemInfo) {
+	var (
+		ndesc, ninc = 0, -1
+		lpos, rpos  = -1, -1
+		btdescs     []byte
+	)
+	for {
+		switch ls.current {
+		case EOS, '\n', '\r':
+			ls.next()
+			goto end
+		case 'd', 'e', 's', 'c', ':':
+			if ninc < 0 {
+				ninc = 0
+				btdescs = make([]byte, 0)
+			}
+			if ninc == 0 {
+				ndesc++
+			}
+			ls.next()
+		case ' ', '\t', '\f', '\v':
+			fallthrough
+		default:
+			if ninc >= 0 {
+				ninc++
+			}
+			if ndesc >= 5 && btdescs != nil {
+				btdescs = append(btdescs, ls.current)
+				if ls.current == '[' {
+					lpos = len(btdescs) - 1
+				} else if ls.current == ']' {
+					rpos = len(btdescs) - 1
+				}
+			}
+			ls.next()
+		}
+	}
+end:
+	if len(btdescs) > 0 {
+		if lpos >= 0 {
+			btdescs = btdescs[lpos+1:]
+		}
+		if rpos >= 0 {
+			btdescs = btdescs[:rpos-lpos-1]
+		}
+		return tkDesc, &SemInfo{S: string(btdescs)}
+	}
+	return '0', nil
+}
+
+// Do lexical analysis.
+func (ls *LexState) llexDesc() (TK, *SemInfo) {
+	for {
+		switch ls.current {
+		case ' ', '\t', '\f', '\v':
+			ls.next()
+		case '/':
+			ls.next()
+			if ls.current == '/' {
+				return ls.readDesc()
+			}
+			return '0', nil
+		default:
+			return '0', nil
+		}
+	}
+}
+
 // Do lexical analysis.
 func (ls *LexState) llex() (TK, *SemInfo) {
 	for {
@@ -392,15 +465,18 @@ func (ls *LexState) llex() (TK, *SemInfo) {
 			return ls.readSharp()
 		default:
 			return ls.llexDefault()
-
 		}
 	}
 }
 
 //NextToken return token after lexical analysis.
-func (ls *LexState) NextToken() *Token {
+func (ls *LexState) NextToken(bdesc bool) *Token {
 	tk := &Token{}
-	tk.T, tk.S = ls.llex()
+	if bdesc {
+		tk.T, tk.S = ls.llexDesc()
+	} else {
+		tk.T, tk.S = ls.llex()
+	}
 	tk.Line = ls.linenumber
 	return tk
 }

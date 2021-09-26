@@ -21,9 +21,8 @@ func (t *importPath) Set(value string) error {
 
 var (
 	gImports  importPath
-	gTarsPath string
-	gOutdir   string
-	gModule   string
+	gTarsPath = flag.String("tarsPath", "tarsgo/tars", "Specify the tars source path.")
+	gModule   = flag.String("module", "", "current go module path")
 )
 
 func printhelp() {
@@ -39,9 +38,8 @@ func printhelp() {
 func main() {
 	flag.Usage = printhelp
 	flag.Var(&gImports, "I", "Specify a specific import path")
-	flag.StringVar(&gTarsPath, "tarsPath", "tarsgo/tars", "Specify the tars source path.")
 	flag.StringVar(&g.GOutdir, "outdir", "", "which dir to put generated code")
-	flag.StringVar(&gModule, "module", "", "current go module path")
+
 	flag.Parse()
 
 	if flag.NArg() == 0 {
@@ -50,9 +48,9 @@ func main() {
 	}
 
 	for _, filename := range flag.Args() {
-		gen := g.NewGenGo(filename, gModule, gOutdir)
+		gen := g.NewGenGo(filename, *gModule, g.GOutdir)
 		gen.I = gImports
-		gen.TarsPath = gTarsPath
+		gen.TarsPath = *gTarsPath
 		gen.Gen()
 	}
 }

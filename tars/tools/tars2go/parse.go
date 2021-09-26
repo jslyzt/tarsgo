@@ -29,6 +29,7 @@ type StructMember struct {
 	OriginKey string // original key
 	Default   string
 	DefType   TK
+	Desc      string // 描述
 }
 
 // StructMemberSorter When serializing, make sure the tags are ordered.
@@ -144,7 +145,15 @@ func (p *Parse) parseErr(err string) {
 
 func (p *Parse) next() {
 	p.lastT = p.t
-	p.t = p.lex.NextToken()
+	p.t = p.lex.NextToken(false)
+}
+
+func (p *Parse) nextDesc(m *StructMember) {
+	p.lastT = p.t
+	p.t = p.lex.NextToken(true)
+	if p.t.T == tkDesc {
+		m.Desc = p.t.S.S
+	}
 }
 
 func (p *Parse) expect(t TK) {
@@ -321,6 +330,7 @@ func (p *Parse) parseStructMember() *StructMember {
 
 	p.next()
 	if p.t.T == tkSemi {
+		p.nextDesc(m)
 		return m
 	}
 	if p.t.T == tkSquarel {
@@ -328,6 +338,7 @@ func (p *Parse) parseStructMember() *StructMember {
 		m.Type = &VarType{Type: tkTArray, TypeK: m.Type, TypeL: p.t.S.I}
 		p.expect(tkSquarer)
 		p.expect(tkSemi)
+		p.nextDesc(m)
 		return m
 	}
 	if p.t.T != tkEq {
@@ -341,6 +352,7 @@ func (p *Parse) parseStructMember() *StructMember {
 	p.next()
 	p.parseStructMemberDefault(m)
 	p.expect(tkSemi)
+	p.nextDesc(m)
 
 	return m
 }
