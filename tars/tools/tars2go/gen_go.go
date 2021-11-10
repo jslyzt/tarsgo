@@ -480,10 +480,12 @@ func (gen *GenGo) genStructDefine(st *StructInfo) {
 
 	for _, v := range st.Mb {
 		c.WriteString("\t" + v.Key + " " + gen.genType(v.Type) + " `")
-		if *gJsonOmitEmpty {
-			c.WriteString("json:\"" + v.OriginKey + ",omitempty\"")
-		} else {
-			c.WriteString("json:\"" + v.OriginKey + "\"")
+		if !strings.Contains(v.Desc, "json:") {
+			if *gJsonOmitEmpty {
+				c.WriteString("json:\"" + v.OriginKey + ",omitempty\"")
+			} else {
+				c.WriteString("json:\"" + v.OriginKey + "\"")
+			}
 		}
 		if len(v.Desc) > 0 {
 			c.WriteString(" " + v.Desc)
