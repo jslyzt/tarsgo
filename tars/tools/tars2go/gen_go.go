@@ -478,10 +478,27 @@ func (gen *GenGo) genStructDefine(st *StructInfo) {
 	c.WriteString("// " + st.Name + " struct implement\n")
 	c.WriteString("type " + st.Name + " struct {\n")
 
+	var scolumn string
 	for _, v := range st.Mb {
 		c.WriteString("\t" + v.Key + " " + gen.genType(v.Type) + " `")
 		if !strings.Contains(v.Desc, "json:") {
-			if *gJsonOmitEmpty {
+			scolumn = ""
+			if strings.Contains(v.Desc, "gorm:") {
+				cidx := strings.Index(v.Desc, "column:")
+				if cidx >= 0 {
+					scolumn = v.Desc[cidx+7:]
+					epos := strings.Index(scolumn, ";")
+					if epos < 0 {
+						epos = strings.Index(scolumn, "\"")
+					}
+					if epos >= 0 {
+						scolumn = scolumn[:epos]
+					}
+				}
+			}
+			if len(scolumn) > 0 {
+				c.WriteString("json:\"" + scolumn + "\"")
+			} else if *gJsonOmitEmpty {
 				c.WriteString("json:\"" + v.OriginKey + ",omitempty\"")
 			} else {
 				c.WriteString("json:\"" + v.OriginKey + "\"")
