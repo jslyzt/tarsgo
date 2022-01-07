@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	GTarsPath = flag.String("tarsPath", "github.com/TarsCloud/TarsGo/tars", "Specify the tars source path.")
+	GTarsPath = flag.String("tarsPath", "tarsgo/tars", "Specify the tars source path.")
 
 	gE               = flag.Bool("E", false, "Generate code before fmt for troubleshooting")
 	gAddServant      = flag.Bool("add-servant", true, "Generate AddServant function")
