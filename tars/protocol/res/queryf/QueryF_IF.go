@@ -46,7 +46,7 @@ func (_obj *QueryF) FindObjectById(Id string, _opt ...map[string]string) (ret []
 		return ret, err
 	}
 	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
-	err, _, ty = _is.SkipToNoCheck(0, true)
+	_, ty, err = _is.SkipToNoCheck(0, true)
 	if err != nil {
 		return ret, err
 	}
@@ -109,7 +109,7 @@ func (_obj *QueryF) FindObjectByIdWithContext(ctx context.Context, Id string, _o
 		return ret, err
 	}
 	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
-	err, _, ty = _is.SkipToNoCheck(0, true)
+	_, ty, err = _is.SkipToNoCheck(0, true)
 	if err != nil {
 		return ret, err
 	}
@@ -178,7 +178,7 @@ func (_obj *QueryF) FindObjectById4Any(Id string, ActiveEp *[]endpointf.Endpoint
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -208,7 +208,7 @@ func (_obj *QueryF) FindObjectById4Any(Id string, ActiveEp *[]endpointf.Endpoint
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -276,7 +276,7 @@ func (_obj *QueryF) FindObjectById4AnyWithContext(ctx context.Context, Id string
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -306,7 +306,7 @@ func (_obj *QueryF) FindObjectById4AnyWithContext(ctx context.Context, Id string
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -375,7 +375,7 @@ func (_obj *QueryF) FindObjectById4All(Id string, ActiveEp *[]endpointf.Endpoint
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -405,7 +405,7 @@ func (_obj *QueryF) FindObjectById4All(Id string, ActiveEp *[]endpointf.Endpoint
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -473,7 +473,7 @@ func (_obj *QueryF) FindObjectById4AllWithContext(ctx context.Context, Id string
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -503,7 +503,7 @@ func (_obj *QueryF) FindObjectById4AllWithContext(ctx context.Context, Id string
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -572,7 +572,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroup(Id string, ActiveEp *[]endpointf.E
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -602,7 +602,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroup(Id string, ActiveEp *[]endpointf.E
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -670,7 +670,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroupWithContext(ctx context.Context, Id
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -700,7 +700,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroupWithContext(ctx context.Context, Id
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -774,7 +774,7 @@ func (_obj *QueryF) FindObjectByIdInSameStation(Id string, SStation string, Acti
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -804,7 +804,7 @@ func (_obj *QueryF) FindObjectByIdInSameStation(Id string, SStation string, Acti
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(4, true)
+	_, ty, err = _is.SkipToNoCheck(4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -877,7 +877,7 @@ func (_obj *QueryF) FindObjectByIdInSameStationWithContext(ctx context.Context, 
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -907,7 +907,7 @@ func (_obj *QueryF) FindObjectByIdInSameStationWithContext(ctx context.Context, 
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(4, true)
+	_, ty, err = _is.SkipToNoCheck(4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -981,7 +981,7 @@ func (_obj *QueryF) FindObjectByIdInSameSet(Id string, SetId string, ActiveEp *[
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -1011,7 +1011,7 @@ func (_obj *QueryF) FindObjectByIdInSameSet(Id string, SetId string, ActiveEp *[
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(4, true)
+	_, ty, err = _is.SkipToNoCheck(4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -1084,7 +1084,7 @@ func (_obj *QueryF) FindObjectByIdInSameSetWithContext(ctx context.Context, Id s
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -1114,7 +1114,7 @@ func (_obj *QueryF) FindObjectByIdInSameSetWithContext(ctx context.Context, Id s
 		}
 	}
 
-	err, _, ty = _is.SkipToNoCheck(4, true)
+	_, ty, err = _is.SkipToNoCheck(4, true)
 	if err != nil {
 		return ret, err
 	}

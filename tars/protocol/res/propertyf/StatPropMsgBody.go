@@ -24,7 +24,7 @@ func (st *StatPropMsgBody) ReadFrom(_is *codec.Reader) error {
 	var ty byte
 	st.resetDefault()
 
-	err, _, ty = _is.SkipToNoCheck(0, true)
+	_, ty, err = _is.SkipToNoCheck(0, true)
 	if err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func (st *StatPropMsgBody) ReadBlock(_is *codec.Reader, tag byte, require bool) 
 	var have bool
 	st.resetDefault()
 
-	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}

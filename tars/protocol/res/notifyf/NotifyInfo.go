@@ -30,7 +30,7 @@ func (st *NotifyInfo) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func (st *NotifyInfo) ReadBlock(_is *codec.Reader, tag byte, require bool) error
 	var have bool
 	st.resetDefault()
 
-	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}

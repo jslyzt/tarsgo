@@ -313,7 +313,7 @@ func logger(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *codec
 		return err
 	}
 	var Buffer []string
-	err, _, ty = _is.SkipToNoCheck(5, true)
+	_, ty, err = _is.SkipToNoCheck(5, true)
 	if err != nil {
 		return err
 	}
@@ -371,7 +371,7 @@ func loggerbyInfo(ctx context.Context, _val interface{}, _os *codec.Buffer, _is 
 		return err
 	}
 	var Buffer []string
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return err
 	}

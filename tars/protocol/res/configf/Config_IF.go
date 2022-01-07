@@ -56,7 +56,7 @@ func (_obj *Config) ListConfig(App string, Server string, Vf *[]string, _opt ...
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -129,7 +129,7 @@ func (_obj *Config) ListConfigWithContext(ctx context.Context, App string, Serve
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(3, true)
+	_, ty, err = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -519,7 +519,7 @@ func (_obj *Config) ListConfigByInfo(ConfigInfo *ConfigInfo, Vf *[]string, _opt 
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -587,7 +587,7 @@ func (_obj *Config) ListConfigByInfoWithContext(ctx context.Context, ConfigInfo 
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -830,7 +830,7 @@ func (_obj *Config) ListAllConfigByInfo(ConfigInfo *GetConfigListInfo, Vf *[]str
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -898,7 +898,7 @@ func (_obj *Config) ListAllConfigByInfoWithContext(ctx context.Context, ConfigIn
 		return ret, err
 	}
 
-	err, _, ty = _is.SkipToNoCheck(2, true)
+	_, ty, err = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}

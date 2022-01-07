@@ -69,7 +69,7 @@ func (st *RequestPacket) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err, have, ty = _is.SkipToNoCheck(7, true)
+	have, ty, err = _is.SkipToNoCheck(7, true)
 	if err != nil {
 		return err
 	}
@@ -89,7 +89,7 @@ func (st *RequestPacket) ReadFrom(_is *codec.Reader) error {
 		}
 	} else if ty == codec.SIMPLE_LIST {
 
-		err, _ = _is.SkipTo(codec.BYTE, 0, true)
+		_, err = _is.SkipTo(codec.BYTE, 0, true)
 		if err != nil {
 			return err
 		}
@@ -114,7 +114,7 @@ func (st *RequestPacket) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err, have = _is.SkipTo(codec.MAP, 9, true)
+	have, err = _is.SkipTo(codec.MAP, 9, true)
 	if err != nil {
 		return err
 	}
@@ -141,7 +141,7 @@ func (st *RequestPacket) ReadFrom(_is *codec.Reader) error {
 		st.Context[k1] = v1
 	}
 
-	err, have = _is.SkipTo(codec.MAP, 10, true)
+	have, err = _is.SkipTo(codec.MAP, 10, true)
 	if err != nil {
 		return err
 	}
@@ -181,7 +181,7 @@ func (st *RequestPacket) ReadBlock(_is *codec.Reader, tag byte, require bool) er
 	var have bool
 	st.ResetDefault()
 
-	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}

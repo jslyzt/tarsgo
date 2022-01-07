@@ -172,7 +172,7 @@ func reportPropMsg(ctx context.Context, _val interface{}, _os *codec.Buffer, _is
 	var have bool
 	var ty byte
 	var Statmsg map[StatPropMsgHead]StatPropMsgBody
-	err, have = _is.SkipTo(codec.MAP, 1, true)
+	have, err = _is.SkipTo(codec.MAP, 1, true)
 	if err != nil {
 		return err
 	}
