@@ -745,7 +745,7 @@ func (gen *GenGo) genReadSimpleList(mb *StructMember, prefix string, hasRet bool
 	errStr := errString(hasRet)
 
 	c.WriteString(`
-err, _ = _is.SkipTo(codec.BYTE, 0, true)
+_, err = _is.SkipTo(codec.BYTE, 0, true)
 ` + errStr + `
 err = _is.Read_int32(&length, 0, true)
 ` + errStr + `
@@ -767,7 +767,7 @@ func (gen *GenGo) genReadVector(mb *StructMember, prefix string, hasRet bool) {
 		require = "true"
 	}
 	c.WriteString(`
-err, have, ty = _is.SkipToNoCheck(` + tag + `,` + require + `)
+have, ty, err = _is.SkipToNoCheck(` + tag + `,` + require + `)
 ` + errStr + `
 `)
 	if require == "false" {
@@ -821,7 +821,7 @@ func (gen *GenGo) genReadArray(mb *StructMember, prefix string, hasRet bool) {
 		require = "true"
 	}
 	c.WriteString(`
-err, have, ty = _is.SkipToNoCheck(` + tag + `,` + require + `)
+have, ty, err = _is.SkipToNoCheck(` + tag + `,` + require + `)
 ` + errStr + `
 `)
 	if require == "false" {
@@ -885,7 +885,7 @@ func (gen *GenGo) genReadMap(mb *StructMember, prefix string, hasRet bool) {
 		require = "true"
 	}
 	c.WriteString(`
-err, have = _is.SkipTo(codec.MAP, ` + tag + `, ` + require + `)
+have, err = _is.SkipTo(codec.MAP, ` + tag + `, ` + require + `)
 ` + errStr + `
 `)
 	if require == "false" {
@@ -993,7 +993,7 @@ func (st *` + st.Name + `) ReadBlock(_is *codec.Reader, tag byte, require bool) 
 	var have bool
 	st.ResetDefault()
 
-	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}
