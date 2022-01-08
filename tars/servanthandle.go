@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"tarsgo/tars/transport"
+	"github.com/jslyzt/tarsgo/tars/transport"
 )
 
 //AddServant add dispatch and interface for object.

@@ -42,7 +42,7 @@ go env -w GO111MODULE=auto
 
 进入 GOPATH目录
 ```
-go get -u tarsgo/tars
+go get -u github.com/jslyzt/tarsgo/tars
 ```
 
 此时tarsgo下载到
@@ -54,7 +54,7 @@ $GOPATH/src/tarsgo/
 
 tarsgo源码下载完毕后, 请安装tars2go工具:
 ```
-go install $GOPATH/src/tarsgo/tars/tools/tars2go
+go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
 ```
 
 ## 快速开始
@@ -91,7 +91,7 @@ module TestApp
 ##### 1.2.1 构建 tars2go
 如果还没有编译tars2go, 则编译并安装tars2go工具
 ```
-go install $GOPATH/src/tarsgo/tars/tools/tars2go
+go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
 ```
 ##### 1.2.2 编译tars文件并转成go文
 	tars2go --outdir=./vendor hello.tars
@@ -100,7 +100,7 @@ go install $GOPATH/src/tarsgo/tars/tools/tars2go
 package main
 
 import (
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
 
     "TestApp"
 )
@@ -323,7 +323,7 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
     "TestApp"
 )
 //tars.Communicator should only init once and be global
@@ -466,7 +466,7 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
     "TestApp"
 )
 
@@ -496,7 +496,7 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
     "time"
     "TestApp"
 )
@@ -533,8 +533,8 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
-    "tarsgo/tars/util/current"
+    "github.com/jslyzt/tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars/util/current"
     "context"
     "time"
     "TestApp"
@@ -712,7 +712,7 @@ for i := 0; i < 5; i++ {
 如下示例用于说明如何使用此api从远程获取配置文件。
 
 ```go
-import "tarsgo/tars"
+import "github.com/jslyzt/tarsgo/tars"
 ...
 cfg := tars.GetServerConfig()
 remoteConf := tars.NewRConf(cfg.App, cfg.Server, cfg.BasePath)
@@ -795,7 +795,7 @@ package main
 
 import (
 	"net/http"
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 )
 
 func main() {
@@ -921,5 +921,5 @@ func ZipkinClientFilter() tars.ClientFilter {
 
 服务端也会注册一个filter，主要功能就是从request包体的status 提取调用链的上下文，以这个作为父span，进行调用信息的记录。
 
-详细代码参见 TarsGo/tars/plugin/zipkintracing
+详细代码参见 github.com/jslyzt/tarsgo/tars/plugin/zipkintracing
 完整的zipkin tracing的客户端和服务端例子，详见 TarsGo/_examples下面的ZipkinTraceClient和ZipkinTraceServer

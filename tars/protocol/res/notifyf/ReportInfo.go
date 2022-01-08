@@ -5,7 +5,8 @@ package notifyf
 
 import (
 	"fmt"
-	"tarsgo/tars/protocol/codec"
+
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
 )
 
 //ReportInfo strcut implement

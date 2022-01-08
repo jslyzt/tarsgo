@@ -3,7 +3,7 @@ package model
 import (
 	"context"
 
-	"tarsgo/tars/protocol/res/requestf"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
 )
 
 // Servant is interface for call the remote server.

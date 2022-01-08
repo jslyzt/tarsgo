@@ -1,6 +1,6 @@
 package tars
 
-import "tarsgo/tars/protocol/res/endpointf"
+import "github.com/jslyzt/tarsgo/tars/protocol/res/endpointf"
 
 var (
 	appCache AppCache

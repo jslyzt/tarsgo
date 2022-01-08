@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"tarsgo/tars"
-	"tarsgo/tars/protocol/res/requestf"
+	"github.com/jslyzt/tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
 
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"

@@ -3,10 +3,11 @@ package protocol
 import (
 	"bytes"
 	"encoding/binary"
-	"tarsgo/tars/protocol/codec"
-	"tarsgo/tars/protocol/res/basef"
-	"tarsgo/tars/protocol/res/requestf"
 	"testing"
+
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/basef"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
 
 	"github.com/stretchr/testify/assert"
 )

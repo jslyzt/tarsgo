@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"tarsgo/tars/protocol/res/requestf"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
 )
 
 type filters struct {

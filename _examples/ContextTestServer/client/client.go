@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 
 	"StressTest"
 )

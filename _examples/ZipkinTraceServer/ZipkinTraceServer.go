@@ -1,12 +1,12 @@
 package main
 
 import (
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 
 	"ZipkinTraceApp"
 	"strconv"
 
-	"tarsgo/tars/plugin/zipkintracing"
+	"github.com/jslyzt/tarsgo/tars/plugin/zipkintracing"
 )
 
 func main() { //Init servant

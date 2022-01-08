@@ -31,4 +31,4 @@
 
 package main
 
-import _ "tarsgo/tars/tools/pb2tarsgo/protoc-gen-go/tarsrpc"
+import _ "github.com/jslyzt/tarsgo/tars/tools/pb2tarsgo/protoc-gen-go/tarsrpc"

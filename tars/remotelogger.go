@@ -3,7 +3,7 @@ package tars
 import (
 	"time"
 
-	"tarsgo/tars/protocol/res/logf"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/logf"
 )
 
 // RemoteTimeWriter writer for writing remote log.

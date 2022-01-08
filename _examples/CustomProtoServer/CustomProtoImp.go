@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strings"
 
-	"tarsgo/tars/transport"
+	"github.com/jslyzt/tarsgo/tars/transport"
 )
 
 // CustomProtocolImp str protocol object implements ServerProtocol interface

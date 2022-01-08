@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"tarsgo/tars/transport"
+	"github.com/jslyzt/tarsgo/tars/transport"
 )
 
 // MyServer struct for testing tars tcp server

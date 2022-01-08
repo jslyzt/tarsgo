@@ -6,4 +6,4 @@ go:
 install:
   - echo "$GOPATH"
 script:
-  - go build tarsgo/tars
+  - go build github.com/jslyzt/tarsgo/tars

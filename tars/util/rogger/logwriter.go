@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"tarsgo/tars/util/gtime"
+	"github.com/jslyzt/tarsgo/tars/util/gtime"
 )
 
 // DAY for rotate log by day

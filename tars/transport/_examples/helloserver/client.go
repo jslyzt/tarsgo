@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"tarsgo/tars/transport"
+	"github.com/jslyzt/tarsgo/tars/transport"
 )
 
 // MyClient is a example client for tars client testing.

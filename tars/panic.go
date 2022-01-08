@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"tarsgo/tars/util/debug"
-	"tarsgo/tars/util/rogger"
+	"github.com/jslyzt/tarsgo/tars/util/debug"
+	"github.com/jslyzt/tarsgo/tars/util/rogger"
 )
 
 //////////////////////////////////////////////////////////////////////////////

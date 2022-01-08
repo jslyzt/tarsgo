@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"tarsgo/tars/util/rtimer"
+	"github.com/jslyzt/tarsgo/tars/util/rtimer"
 )
 
 // TarsClientConf is tars client side config

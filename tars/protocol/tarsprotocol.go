@@ -2,8 +2,9 @@ package protocol
 
 import (
 	"encoding/binary"
-	"tarsgo/tars/protocol/codec"
-	"tarsgo/tars/protocol/res/requestf"
+
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
 )
 
 var maxPackageLength int = 10485760

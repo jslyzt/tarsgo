@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"tarsgo/tars/protocol/res/statf"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/statf"
 )
 
 var realIPHeader []string

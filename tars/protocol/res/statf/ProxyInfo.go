@@ -5,7 +5,8 @@ package statf
 
 import (
 	"fmt"
-	"tarsgo/tars/protocol/codec"
+
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
 )
 
 //ProxyInfo strcut implement

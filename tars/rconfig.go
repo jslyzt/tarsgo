@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"tarsgo/tars/protocol/res/configf"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/configf"
 )
 
 func saveFile(path string, filename string, content string) error {

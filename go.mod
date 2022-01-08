@@ -1,4 +1,4 @@
-module tarsgo
+module github.com/jslyzt/tarsgo
 
 go 1.17
 

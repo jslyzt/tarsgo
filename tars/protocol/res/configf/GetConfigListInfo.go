@@ -5,7 +5,8 @@ package configf
 
 import (
 	"fmt"
-	"tarsgo/tars/protocol/codec"
+
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
 )
 
 //GetConfigListInfo strcut implement

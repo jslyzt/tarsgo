@@ -3,7 +3,7 @@ package tars
 import (
 	"path/filepath"
 
-	"tarsgo/tars/util/rogger"
+	"github.com/jslyzt/tarsgo/tars/util/rogger"
 )
 
 // GetLogger Get a logger

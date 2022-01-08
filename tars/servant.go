@@ -8,14 +8,14 @@ import (
 	"sync/atomic"
 	"time"
 
-	"tarsgo/tars/model"
-	"tarsgo/tars/protocol"
-	"tarsgo/tars/protocol/res/basef"
-	"tarsgo/tars/protocol/res/requestf"
-	"tarsgo/tars/util/current"
-	"tarsgo/tars/util/endpoint"
-	"tarsgo/tars/util/rtimer"
-	"tarsgo/tars/util/tools"
+	"github.com/jslyzt/tarsgo/tars/model"
+	"github.com/jslyzt/tarsgo/tars/protocol"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/basef"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
+	"github.com/jslyzt/tarsgo/tars/util/current"
+	"github.com/jslyzt/tarsgo/tars/util/endpoint"
+	"github.com/jslyzt/tarsgo/tars/util/rtimer"
+	"github.com/jslyzt/tarsgo/tars/util/tools"
 )
 
 var (

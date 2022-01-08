@@ -6,11 +6,12 @@ package adminf
 import (
 	"context"
 	"fmt"
-	m "tarsgo/tars/model"
-	"tarsgo/tars/protocol/codec"
-	"tarsgo/tars/protocol/res/requestf"
-	"tarsgo/tars/util/current"
-	"tarsgo/tars/util/tools"
+
+	m "github.com/jslyzt/tarsgo/tars/model"
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
+	"github.com/jslyzt/tarsgo/tars/util/current"
+	"github.com/jslyzt/tarsgo/tars/util/tools"
 )
 
 //AdminF struct

@@ -6,11 +6,11 @@ import (
 	"encoding/binary"
 	"time"
 
-	"tarsgo/tars/protocol"
-	"tarsgo/tars/protocol/codec"
-	"tarsgo/tars/protocol/res/basef"
-	"tarsgo/tars/protocol/res/requestf"
-	"tarsgo/tars/util/current"
+	"github.com/jslyzt/tarsgo/tars/protocol"
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/basef"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/requestf"
+	"github.com/jslyzt/tarsgo/tars/util/current"
 )
 
 type dispatch interface {

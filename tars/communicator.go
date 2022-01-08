@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"sync"
 
-	s "tarsgo/tars/model"
-	"tarsgo/tars/util/tools"
+	s "github.com/jslyzt/tarsgo/tars/model"
+	"github.com/jslyzt/tarsgo/tars/util/tools"
 )
 
 // ProxyPrx interface

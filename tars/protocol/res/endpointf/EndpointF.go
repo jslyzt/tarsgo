@@ -6,7 +6,7 @@ package endpointf
 import (
 	"fmt"
 
-	"tarsgo/tars/protocol/codec"
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

@@ -46,7 +46,7 @@ go env -w GO111MODULE=auto
 cd `$GOPATH`
 
 ```bash
-go get -u tarsgo/tars
+go get -u github.com/jslyzt/tarsgo/tars
 ```
 
 now tarsgo downloaded to path:
@@ -58,7 +58,7 @@ $GOPATH/src/tarsgo/
 After tarsgo src be downloaded, please install `tars2go`:
 
 ```bash
-go install $GOPATH/src/tarsgo/tars/tools/tars2go
+go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
 ```
 
 ## Quickstart
@@ -98,7 +98,7 @@ module TestApp
 If not install `tars2go`, compile and install the `tars2go` tools.
 
 ```bash
-go install $GOPATH/src/tarsgo/tars/tools/tars2go
+go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
 ```
 
 ##### 1.2.2 Compile the Tars File and Translate into Go File
@@ -113,7 +113,7 @@ tars2go --outdir=./vendor hello.tars
 package main
 
 import (
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
 
     "TestApp"
 )
@@ -331,7 +331,7 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
     "TestApp"
 )
 //tars.Communicator should only init once and be global
@@ -486,7 +486,7 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
     "TestApp"
 )
 
@@ -515,7 +515,7 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars"
     "time"
     "TestApp"
 )
@@ -551,8 +551,8 @@ package main
 
 import (
     "fmt"
-    "tarsgo/tars"
-    "tarsgo/tars/util/current"
+    "github.com/jslyzt/tarsgo/tars"
+    "github.com/jslyzt/tarsgo/tars/util/current"
     "context"
     "time"
     "TestApp"
@@ -735,7 +735,7 @@ Users can set up remote configuration from OSS. See more detail in [tars-config]
 That is an example to illustrate how to use this API to get a configuration file from remote.
 
 ```go
-import "tarsgo/tars"
+import "github.com/jslyzt/tarsgo/tars"
 ...
 cfg := tars.GetServerConfig()
 remoteConf := tars.NewRConf(cfg.App, cfg.Server, cfg.BasePath)
@@ -813,7 +813,7 @@ package main
 
 import (
 	"net/http"
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 )
 
 func main() {
@@ -940,4 +940,4 @@ func ZipkinClientFilter() tars.ClientFilter {
 
 The server will add filters, which exact the span context from the request package's status and start a new span.
 
-Read more under `TarsGo/tars/plugin/zipkintracing`. For client-side and server-side example code, read `ZipkinTraceClient` & `ZipkinTraceServer` under the examples.
+Read more under `github.com/jslyzt/tarsgo/tars/plugin/zipkintracing`. For client-side and server-side example code, read `ZipkinTraceClient` & `ZipkinTraceServer` under the examples.

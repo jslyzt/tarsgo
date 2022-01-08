@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"tarsgo/tars"
-	"tarsgo/tars/protocol/res/adminf"
+	"github.com/jslyzt/tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/adminf"
 )
 
 func main() {

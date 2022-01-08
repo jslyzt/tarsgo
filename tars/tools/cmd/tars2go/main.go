@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	g "tarsgo/tars/tools/tars2go"
+
+	g "github.com/jslyzt/tarsgo/tars/tools/tars2go"
 )
 
 type importPath []string

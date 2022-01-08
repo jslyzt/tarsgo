@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 
 	"StressTest"
 	"runtime/pprof"

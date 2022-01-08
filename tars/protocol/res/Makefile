@@ -1,4 +1,4 @@
 all:
-	tars2go -add-servant=false -tarsPath tarsgo/tars *.tars
+	tars2go -add-servant=false -tarsPath github.com/jslyzt/tarsgo/tars *.tars
 	#override file
-	sed -i 's|"endpointf"|"tarsgo/tars/protocol/res/endpointf"|g' queryf/QueryF_IF.go
+	sed -i 's|"endpointf"|"github.com/jslyzt/tarsgo/tars/protocol/res/endpointf"|g' queryf/QueryF_IF.go

@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"tarsgo/tars/util/current"
+	"github.com/jslyzt/tarsgo/tars/util/current"
 )
 
 const (

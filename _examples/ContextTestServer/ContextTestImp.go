@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 
-	"tarsgo/tars/util/current"
+	"github.com/jslyzt/tarsgo/tars/util/current"
 )
 
 type ContextTestImp struct {

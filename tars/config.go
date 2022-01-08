@@ -3,7 +3,7 @@ package tars
 import (
 	"time"
 
-	"tarsgo/tars/util/endpoint"
+	"github.com/jslyzt/tarsgo/tars/util/endpoint"
 )
 
 var svrCfg *serverConfig

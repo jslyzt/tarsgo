@@ -13,11 +13,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"tarsgo/tars/protocol/res/endpointf"
-	"tarsgo/tars/protocol/res/queryf"
-	"tarsgo/tars/util/consistenthash"
-	"tarsgo/tars/util/endpoint"
-	"tarsgo/tars/util/gtime"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/endpointf"
+	"github.com/jslyzt/tarsgo/tars/protocol/res/queryf"
+	"github.com/jslyzt/tarsgo/tars/util/consistenthash"
+	"github.com/jslyzt/tarsgo/tars/util/endpoint"
+	"github.com/jslyzt/tarsgo/tars/util/gtime"
 )
 
 //EndpointManager interface of naming system

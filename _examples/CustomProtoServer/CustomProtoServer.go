@@ -1,7 +1,7 @@
 package main
 
 import (
-	"tarsgo/tars"
+	"github.com/jslyzt/tarsgo/tars"
 )
 
 func main() { //Init servant

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"tarsgo/tars/protocol/codec"
+	"github.com/jslyzt/tarsgo/tars/protocol/codec"
 )
 
 type TarsStructIF interface {
