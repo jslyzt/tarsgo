@@ -33,7 +33,7 @@ type AdapterProxy struct {
 	lastBlockTime   int64
 	lastCheckTime   int64
 
-	count  int
+	//count  int
 	closed bool
 }
 

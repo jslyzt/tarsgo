@@ -34,7 +34,7 @@ func (st *StatPropMsgBody) ReadFrom(_is *codec.Reader) error {
 		if err != nil {
 			return err
 		}
-		st.VInfo = make([]StatPropInfo, length, length)
+		st.VInfo = make([]StatPropInfo, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = st.VInfo[i0].ReadBlock(_is, 0, false)

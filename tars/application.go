@@ -30,7 +30,8 @@ import (
 var tarsConfig map[string]*transport.TarsServerConf
 var goSvrs map[string]*transport.TarsServer
 var httpSvrs map[string]*http.Server
-var listenFds []*os.File
+
+//var listenFds []*os.File
 var shutdown chan bool
 var serList []string
 var objRunList []string
@@ -285,7 +286,7 @@ func Run() {
 
 		s := goSvrs[obj]
 		if s == nil {
-			teerDown(fmt.Errorf("Obj not found %s", obj))
+			teerDown(fmt.Errorf("obj not found %s", obj))
 			break
 		}
 		TLOG.Debugf("Run %s  %+v", obj, s.GetConfig())

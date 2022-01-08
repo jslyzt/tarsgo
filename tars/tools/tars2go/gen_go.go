@@ -1546,7 +1546,7 @@ func (gen *GenGo) genSwitchCase(tname string, fun *FunInfo) {
 	if fun.HasRet {
 		c.WriteString("var _funRet_ " + gen.genType(fun.RetType) + "\n")
 
-		c.WriteString(`if _withContext == false {
+		c.WriteString(`if !_withContext {
 		_imp := _val.(_imp` + tname + `)
 		_funRet_, err = _imp.` + fun.Name + `(`)
 		for _, v := range fun.Args {
@@ -1572,7 +1572,7 @@ func (gen *GenGo) genSwitchCase(tname string, fun *FunInfo) {
 		c.WriteString(")" + "\n } \n")
 
 	} else {
-		c.WriteString(`if _withContext == false {
+		c.WriteString(`if !_withContext {
 		_imp := _val.(_imp` + tname + `)
 		err = _imp.` + fun.Name + `(`)
 		for _, v := range fun.Args {

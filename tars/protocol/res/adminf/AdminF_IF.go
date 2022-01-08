@@ -199,7 +199,7 @@ func shutdown(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *cod
 	var length int32
 	var have bool
 	var ty byte
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impAdminF)
 		err = _imp.Shutdown()
 		if err != nil {
@@ -227,7 +227,7 @@ func notify(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *codec
 	if err != nil {
 		return err
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impAdminF)
 		ret, err := _imp.Notify(Command)
 		if err != nil {

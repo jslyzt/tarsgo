@@ -65,13 +65,10 @@ func (st *ProxyInfo) ReadBlock(_is *codec.Reader, tag byte, require bool) error 
 
 //WriteTo encode struct to buffer
 func (st *ProxyInfo) WriteTo(_os *codec.Buffer) error {
-	var err error
-
-	err = _os.Write_bool(st.BFromClient, 0)
+	err := _os.Write_bool(st.BFromClient, 0)
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 

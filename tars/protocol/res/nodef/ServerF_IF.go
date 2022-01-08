@@ -243,7 +243,7 @@ func keepAlive(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *co
 	if err != nil {
 		return err
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impServerF)
 		ret, err := _imp.KeepAlive(&ServerInfo)
 		if err != nil {
@@ -291,7 +291,7 @@ func reportVersion(ctx context.Context, _val interface{}, _os *codec.Buffer, _is
 	if err != nil {
 		return err
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impServerF)
 		ret, err := _imp.ReportVersion(App, ServerName, Version)
 		if err != nil {

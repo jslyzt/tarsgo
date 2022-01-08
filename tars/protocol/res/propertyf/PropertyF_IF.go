@@ -198,7 +198,7 @@ func reportPropMsg(ctx context.Context, _val interface{}, _os *codec.Buffer, _is
 
 		Statmsg[k3] = v3
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impPropertyF)
 		ret, err := _imp.ReportPropMsg(Statmsg)
 		if err != nil {

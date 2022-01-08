@@ -515,13 +515,13 @@ func (b *Reader) SkipToNoCheck(tag byte, require bool) (bool, byte, error) {
 		tyCur, tagCur, err := b.readHead()
 		if err != nil {
 			if require {
-				return false, tyCur, fmt.Errorf("Can not find Tag %d. But require. %s", tag, err.Error())
+				return false, tyCur, fmt.Errorf("can not find tag %d. but require. %s", tag, err.Error())
 			}
 			return false, tyCur, nil
 		}
 		if tyCur == STRUCT_END || tagCur > tag {
 			if require {
-				return false, tyCur, fmt.Errorf("Can not find Tag %d. But require. tagCur: %d, tyCur: %d",
+				return false, tyCur, fmt.Errorf("can not find tag %d. but require. tagCur: %d, tyCur: %d",
 					tag, tagCur, tyCur)
 			}
 			// 多读了一个head, 退回去.
@@ -822,7 +822,7 @@ func (b *Reader) Read_string(data *string, tag byte, require bool) error {
 		var len uint32
 		err = bReadU32(b.buf, &len)
 		if err != nil {
-			return fmt.Errorf("Read_string4 tag:%d error:%v", tag, err)
+			return fmt.Errorf("read_string4 tag:%d error:%v", tag, err)
 		}
 		buff := b.Next(int(len))
 		*data = string(buff)
@@ -830,7 +830,7 @@ func (b *Reader) Read_string(data *string, tag byte, require bool) error {
 		var len uint8
 		err = bReadU8(b.buf, &len)
 		if err != nil {
-			return fmt.Errorf("Read_string1 tag:%d error:%v", tag, err)
+			return fmt.Errorf("read_string1 tag:%d error:%v", tag, err)
 		}
 		buff := b.Next(int(len))
 		*data = string(buff)

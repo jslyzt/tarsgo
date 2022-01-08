@@ -46,6 +46,14 @@ func (s *MyServer) InvokeTimeout(pkg []byte) []byte {
 	return ret
 }
 
+func (s *MyServer) GetCloseMsg() []byte {
+	return nil
+}
+
+func (s *MyServer) DoClose(ctx context.Context) {
+
+}
+
 func main() {
 	conf := &transport.TarsServerConf{
 		Proto:         "udp",

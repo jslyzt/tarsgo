@@ -411,7 +411,7 @@ func reportServer(ctx context.Context, _val interface{}, _os *codec.Buffer, _is 
 	if err != nil {
 		return err
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impNotify)
 		err = _imp.ReportServer(SServerName, SThreadId, SMessage)
 		if err != nil {
@@ -449,7 +449,7 @@ func notifyServer(ctx context.Context, _val interface{}, _os *codec.Buffer, _is 
 	if err != nil {
 		return err
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impNotify)
 		err = _imp.NotifyServer(SServerName, Level, SMessage)
 		if err != nil {
@@ -478,7 +478,7 @@ func getNotifyInfo(ctx context.Context, _val interface{}, _os *codec.Buffer, _is
 		return err
 	}
 	var StInfo NotifyInfo
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impNotify)
 		ret, err := _imp.GetNotifyInfo(&StKey, &StInfo)
 		if err != nil {
@@ -521,7 +521,7 @@ func reportNotifyInfo(ctx context.Context, _val interface{}, _os *codec.Buffer, 
 	if err != nil {
 		return err
 	}
-	if withContext == false {
+	if !withContext {
 		_imp := _val.(_impNotify)
 		err = _imp.ReportNotifyInfo(&Info)
 		if err != nil {

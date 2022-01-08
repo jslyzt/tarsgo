@@ -314,7 +314,7 @@ func (u *UniAttribute) doGet(data interface{}, is *codec.Reader) error {
 					return err
 				}
 
-				//st.Vf = make([]float32, length, length)
+				//st.Vf = make([]float32, length)
 				//for i0, e0 := int32(0), length; i0 < e0; i0++ {
 				//
 				//	err = _is.Read_float32(&st.Vf[i0], 0, false)

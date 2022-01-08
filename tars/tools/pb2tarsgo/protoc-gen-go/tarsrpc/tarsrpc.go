@@ -272,7 +272,7 @@ func (t *tarsrpc) generateDispatch(service *pb.ServiceDescriptorProto) {
 				return err
 			}
 			var res %s
-            if withContext == false {
+            if !withContext {
 				imp := val.(imp%s)
 				res, err = imp.%s(inputDefine)
 				if err != nil {
