@@ -161,7 +161,7 @@ func GetAllDyeingUser() []string {
 	defer mutex.RUnlock()
 
 	var arr []string
-	for k := range dyeingUserMap {
+	for k, _ := range dyeingUserMap {
 		arr = append(arr, k)
 	}
 

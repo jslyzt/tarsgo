@@ -193,9 +193,9 @@ func (c *Conf) InitFromBytes(content []byte) error {
 		if token == nil {
 			break
 		}
-		switch token := token.(type) {
+		switch xtoken := token.(type) {
 		case xml.CharData:
-			lineDecoder := bufio.NewScanner(bytes.NewReader(token))
+			lineDecoder := bufio.NewScanner(bytes.NewReader(xtoken))
 			lineDecoder.Split(bufio.ScanLines)
 			for lineDecoder.Scan() {
 				line := strings.Trim(lineDecoder.Text(), whiteSpaceChars)
@@ -215,7 +215,7 @@ func (c *Conf) InitFromBytes(content []byte) error {
 				currNode.addChild(k, leaf)
 			}
 		case xml.StartElement:
-			nodeName := token.Name.Local
+			nodeName := xtoken.Name.Local
 			node, ok := currNode.findChild(nodeName)
 			if !ok {
 				node = newElem(Node, nodeName)
@@ -223,7 +223,7 @@ func (c *Conf) InitFromBytes(content []byte) error {
 			}
 			nodeStack = append(nodeStack, node)
 		case xml.EndElement:
-			nodeName := token.Name.Local
+			nodeName := xtoken.Name.Local
 			if currNode.name != nodeName {
 				return fmt.Errorf("xml end not match :%s", nodeName)
 			}

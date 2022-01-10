@@ -37,7 +37,9 @@ func (h *udpHandler) Handle() error {
 		tick := time.NewTicker(time.Second)
 		defer tick.Stop()
 		for atomic.LoadInt32(&h.ts.numInvoke) > 0 {
-			<-tick.C
+			select {
+			case <-tick.C:
+			}
 		}
 		atomic.AddInt32(&h.ts.numConn, -1)
 	}()

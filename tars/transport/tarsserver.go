@@ -124,9 +124,11 @@ func (ts *TarsServer) invoke(ctx context.Context, pkg []byte) []byte {
 			rsp = ts.svr.Invoke(ctx, pkg)
 			cancelFunc()
 		}()
-		<-invokeDone.Done()
-		if len(rsp) == 0 { // The rsp must be none-empty
-			rsp = ts.svr.InvokeTimeout(pkg)
+		select {
+		case <-invokeDone.Done():
+			if len(rsp) == 0 { // The rsp must be none-empty
+				rsp = ts.svr.InvokeTimeout(pkg)
+			}
 		}
 	}
 	return rsp

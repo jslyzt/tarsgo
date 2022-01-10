@@ -9,10 +9,6 @@ import (
 	"github.com/jslyzt/tarsgo/tars/protocol/codec"
 )
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ = fmt.Errorf
-var _ = codec.FromInt8
-
 // EndpointF struct implement
 type EndpointF struct {
 	Host        string `json:"host"`
@@ -106,7 +102,6 @@ func (st *EndpointF) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	_ = err
 	_ = length
 	_ = have
 	_ = ty
@@ -130,10 +125,7 @@ func (st *EndpointF) ReadBlock(_is *codec.Reader, tag byte, require bool) error 
 		return nil
 	}
 
-	err = st.ReadFrom(_is)
-	if err != nil {
-		return err
-	}
+	st.ReadFrom(_is)
 
 	err = _is.SkipToStructEnd()
 	if err != nil {
@@ -212,8 +204,6 @@ func (st *EndpointF) WriteTo(_os *codec.Buffer) error {
 		return err
 	}
 
-	_ = err
-
 	return nil
 }
 
@@ -225,10 +215,7 @@ func (st *EndpointF) WriteBlock(_os *codec.Buffer, tag byte) error {
 		return err
 	}
 
-	err = st.WriteTo(_os)
-	if err != nil {
-		return err
-	}
+	st.WriteTo(_os)
 
 	err = _os.WriteHead(codec.STRUCT_END, 0)
 	if err != nil {
