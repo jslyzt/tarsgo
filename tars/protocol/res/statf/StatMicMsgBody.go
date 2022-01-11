@@ -46,7 +46,7 @@ func (st *StatMicMsgBody) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	have, err = _is.SkipTo(codec.MAP, 3, true)
+	err, have = _is.SkipTo(codec.MAP, 3, true)
 	if err != nil {
 		return err
 	}
@@ -100,7 +100,7 @@ func (st *StatMicMsgBody) ReadBlock(_is *codec.Reader, tag byte, require bool) e
 	var have bool
 	st.resetDefault()
 
-	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}

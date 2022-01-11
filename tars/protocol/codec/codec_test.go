@@ -219,7 +219,7 @@ func TestSkipStruct(t *testing.T) {
 
 	rd := r(b)
 
-	have, err := rd.SkipTo(STRUCT_BEGIN, 1, true)
+	err, have := rd.SkipTo(STRUCT_BEGIN, 1, true)
 	if err != nil || have == false {
 		t.Error(err)
 	}
@@ -256,7 +256,8 @@ func TestSkipStruct2(t *testing.T) {
 	}
 
 	rb := r(b)
-	have, err := rb.SkipTo(STRUCT_BEGIN, 1, true)
+
+	err, have := rb.SkipTo(STRUCT_BEGIN, 1, true)
 	if err != nil || !have {
 		t.Error(err)
 	}
@@ -569,7 +570,7 @@ func TestReader_unreadHead(t *testing.T) {
 
 	// string type unread head
 	reader.unreadHead(gotTag)
-	gotType, gotTag, _ = reader.readHead()
+	gotType, gotTag, err = reader.readHead()
 	// skip next 6 byte. 1 byte for string length, 5 byte for string itself.
 	reader.Skip(6)
 	if gotType != wantType || gotTag != wantTag {
@@ -590,7 +591,7 @@ func TestReader_unreadHead(t *testing.T) {
 
 	// uint8 unread head
 	reader.unreadHead(gotTag)
-	gotType, gotTag, _ = reader.readHead()
+	gotType, gotTag, err = reader.readHead()
 	if gotType != wantType || gotTag != wantTag {
 		t.Errorf("Failed to readHead. wantType:%v, wantTag:%v, gotType:%v, gotType:%v\n",
 			wantType, wantTag, gotType, gotTag)
@@ -620,8 +621,8 @@ func TestReader_SkipToNoCheck(t *testing.T) {
 	}
 
 	reader := r(prepareWrite())
-	exists, _, err := reader.SkipToNoCheck(3, true)
-	if err == nil || exists {
+	err, exists, _ := reader.SkipToNoCheck(3, true)
+	if err == nil || exists{
 		t.Error("SkipToNoCheck failed.expecting error, but got nil\n")
 	}
 	if err != nil && err.Error() != "Can not find Tag 3. But require. tagCur: 5, tyCur: 0" {
@@ -630,7 +631,7 @@ func TestReader_SkipToNoCheck(t *testing.T) {
 	}
 
 	reader = r(prepareWrite())
-	exists, gotType, err := reader.SkipToNoCheck(2, true)
+	err, exists, gotType := reader.SkipToNoCheck(2, true)
 	if err != nil || !exists {
 		t.Errorf("SkipToNoCheck failed.expecting nil error, but got:%v\n", err)
 	}

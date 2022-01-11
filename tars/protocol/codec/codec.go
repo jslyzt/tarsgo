@@ -528,45 +528,46 @@ func (b *Reader) SkipToStructEnd() error {
 }
 
 // SkipToNoCheck for skip to the none STRUCT_END tag.
-func (b *Reader) SkipToNoCheck(tag byte, require bool) (bool, byte, error) {
+func (b *Reader) SkipToNoCheck(tag byte, require bool) (error, bool, byte) {
 	for {
 		tyCur, tagCur, err := b.readHead()
 		if err != nil {
 			if require {
-				return false, tyCur, fmt.Errorf("can not find tag %d. but require. %s", tag, err.Error())
+				return fmt.Errorf("Can not find Tag %d. But require. %s", tag, err.Error()),
+					false, tyCur
 			}
-			return false, tyCur, nil
+			return nil, false, tyCur
 		}
 		if tyCur == STRUCT_END || tagCur > tag {
 			if require {
-				return false, tyCur, fmt.Errorf("can not find tag %d. but require. tagCur: %d, tyCur: %d",
-					tag, tagCur, tyCur)
+				return fmt.Errorf("Can not find Tag %d. But require. tagCur: %d, tyCur: %d",
+					tag, tagCur, tyCur), false, tyCur
 			}
 			// 多读了一个head, 退回去.
 			b.unreadHead(tagCur)
-			return false, tyCur, nil
+			return nil, false, tyCur
 		}
 		if tagCur == tag {
-			return true, tyCur, nil
+			return nil, true, tyCur
 		}
 
 		// tagCur < tag
 		if err = b.skipField(tyCur); err != nil {
-			return false, tyCur, err
+			return err, false, tyCur
 		}
 	}
 }
 
 // SkipTo skip to the given tag.
-func (b *Reader) SkipTo(ty, tag byte, require bool) (bool, error) {
-	have, tyCur, err := b.SkipToNoCheck(tag, require)
+func (b *Reader) SkipTo(ty, tag byte, require bool) (error, bool) {
+	err, have, tyCur := b.SkipToNoCheck(tag, require)
 	if err != nil {
-		return false, err
+		return err, false
 	}
 	if have && ty != tyCur {
-		return false, fmt.Errorf("type not match, need %d, bug %d", ty, tyCur)
+		return fmt.Errorf("type not match, need %d, bug %d", ty, tyCur), false
 	}
-	return have, nil
+	return nil, have
 }
 
 // Read_slice_int8 reads []int8 for the given length and the require or optional sign.
@@ -606,7 +607,7 @@ func (b *Reader) Read_bytes(data *[]byte, len int32, require bool) error {
 
 // Read_int8 reads the int8 data for the tag and the require or optional sign.
 func (b *Reader) Read_int8(data *int8, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}
@@ -654,7 +655,7 @@ func (b *Reader) Read_bool(data *bool, tag byte, require bool) error {
 
 // Read_int16 reads the int16 value for the tag and the require or optional sign.
 func (b *Reader) Read_int16(data *int16, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}
@@ -691,7 +692,7 @@ func (b *Reader) Read_uint16(data *uint16, tag byte, require bool) error {
 
 // Read_int32 reads the int32 value for the tag and the require or optional sign.
 func (b *Reader) Read_int32(data *int32, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}
@@ -732,7 +733,7 @@ func (b *Reader) Read_uint32(data *uint32, tag byte, require bool) error {
 
 // Read_int64 reads the int64 value for the tag and the require or optional sign.
 func (b *Reader) Read_int64(data *int64, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}
@@ -770,7 +771,7 @@ func (b *Reader) Read_int64(data *int64, tag byte, require bool) error {
 
 // Read_float32 reads the float32 value for the tag and the require or optional sign.
 func (b *Reader) Read_float32(data *float32, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}
@@ -797,7 +798,7 @@ func (b *Reader) Read_float32(data *float32, tag byte, require bool) error {
 
 // Read_float64 reads the float64 value for the tag and the require or optional sign.
 func (b *Reader) Read_float64(data *float64, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}
@@ -828,7 +829,7 @@ func (b *Reader) Read_float64(data *float64, tag byte, require bool) error {
 
 // Read_string reads the string value for the tag and the require or optional sign.
 func (b *Reader) Read_string(data *string, tag byte, require bool) error {
-	have, ty, err := b.SkipToNoCheck(tag, require)
+	err, have, ty := b.SkipToNoCheck(tag, require)
 	if err != nil {
 		return err
 	}

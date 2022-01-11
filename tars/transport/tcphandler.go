@@ -24,10 +24,10 @@ type tcpHandler struct {
 	lis *net.TCPListener
 	ts  *TarsServer
 
-	//readBuffer  int
-	//writeBuffer int
-	//tcpNoDelay  bool
-	gpool *gpool.Pool
+	readBuffer  int
+	writeBuffer int
+	tcpNoDelay  bool
+	gpool       *gpool.Pool
 
 	conns sync.Map
 

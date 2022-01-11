@@ -31,7 +31,7 @@ func (st *NotifyInfo) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(2, true)
+	err, _, ty = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,7 @@ func (st *NotifyInfo) ReadFrom(_is *codec.Reader) error {
 		if err != nil {
 			return err
 		}
-		st.NotifyItems = make([]NotifyItem, length)
+		st.NotifyItems = make([]NotifyItem, length, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = st.NotifyItems[i0].ReadBlock(_is, 0, false)
@@ -73,7 +73,7 @@ func (st *NotifyInfo) ReadBlock(_is *codec.Reader, tag byte, require bool) error
 	var have bool
 	st.resetDefault()
 
-	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}

@@ -16,8 +16,8 @@ type udpHandler struct {
 	conf *TarsServerConf
 	ts   *TarsServer
 
-	conn *net.UDPConn
-	//numInvoke int32
+	conn      *net.UDPConn
+	numInvoke int32
 }
 
 func (h *udpHandler) Listen() (err error) {
@@ -87,6 +87,7 @@ func (h *udpHandler) Handle() error {
 			atomic.AddInt32(&h.ts.numInvoke, -1)
 		}()
 	}
+	return nil
 }
 
 func (h *udpHandler) OnShutdown() {

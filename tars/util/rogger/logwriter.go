@@ -191,6 +191,7 @@ func (w *DateWriter) cleanOldLogs() {
 			os.Remove(fullPath)
 		}
 	}
+	return
 }
 
 func (w *DateWriter) getCurrDate() string {

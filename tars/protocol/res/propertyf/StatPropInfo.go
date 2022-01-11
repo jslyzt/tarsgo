@@ -48,7 +48,7 @@ func (st *StatPropInfo) ReadBlock(_is *codec.Reader, tag byte, require bool) err
 	var have bool
 	st.resetDefault()
 
-	have, err = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
 	if err != nil {
 		return err
 	}

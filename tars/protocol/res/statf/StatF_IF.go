@@ -284,7 +284,7 @@ func reportMicMsg(ctx context.Context, _val interface{}, _os *codec.Buffer, _is 
 	var have bool
 	var ty byte
 	var Msg map[StatMicMsgHead]StatMicMsgBody
-	have, err = _is.SkipTo(codec.MAP, 1, true)
+	err, have = _is.SkipTo(codec.MAP, 1, true)
 	if err != nil {
 		return err
 	}
@@ -349,7 +349,7 @@ func reportSampleMsg(ctx context.Context, _val interface{}, _os *codec.Buffer, _
 	var have bool
 	var ty byte
 	var Msg []StatSampleMsg
-	_, ty, err = _is.SkipToNoCheck(1, true)
+	err, _, ty = _is.SkipToNoCheck(1, true)
 	if err != nil {
 		return err
 	}
@@ -359,7 +359,7 @@ func reportSampleMsg(ctx context.Context, _val interface{}, _os *codec.Buffer, _
 		if err != nil {
 			return err
 		}
-		Msg = make([]StatSampleMsg, length)
+		Msg = make([]StatSampleMsg, length, length)
 		for i3, e3 := int32(0), length; i3 < e3; i3++ {
 
 			err = Msg[i3].ReadBlock(_is, 0, false)

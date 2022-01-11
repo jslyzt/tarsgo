@@ -12,6 +12,13 @@ import (
 // MyServer struct for testing tars tcp server
 type MyServer struct{}
 
+func (s *MyServer) GetCloseMsg() []byte {
+	return []byte("")
+}
+
+func (s *MyServer) DoClose(ctx context.Context) {
+}
+
 // Invoke recv request and make response.
 func (s *MyServer) Invoke(ctx context.Context, req []byte) (rsp []byte) {
 	fmt.Println("recv", string(req))
@@ -45,14 +52,6 @@ func (s *MyServer) InvokeTimeout(pkg []byte) []byte {
 	binary.BigEndian.PutUint32(pkg[:4], uint32(len(ret)))
 	copy(pkg[4:], payload)
 	return ret
-}
-
-func (s *MyServer) GetCloseMsg() []byte {
-	return nil
-}
-
-func (s *MyServer) DoClose(ctx context.Context) {
-
 }
 
 func main() {

@@ -74,7 +74,7 @@ func (u *UniAttribute) Encode(os *codec.Buffer) error {
 }
 
 func (u *UniAttribute) Decode(is *codec.Reader) error {
-	_, err := is.SkipTo(codec.MAP, 0, false)
+	err, have := is.SkipTo(codec.MAP, 0, false)
 	if err != nil {
 		return err
 	}
@@ -86,7 +86,6 @@ func (u *UniAttribute) Decode(is *codec.Reader) error {
 	}
 
 	var ty byte
-	var have bool
 	for i, e := int32(0), length; i < e; i++ {
 		var k string
 		var v []byte
@@ -96,14 +95,14 @@ func (u *UniAttribute) Decode(is *codec.Reader) error {
 			return err
 		}
 
-		have, ty, err = is.SkipToNoCheck(1, false)
+		err, have, ty = is.SkipToNoCheck(1, false)
 		if err != nil {
 			return err
 		}
 		if have {
 			if ty == codec.SIMPLE_LIST {
 
-				_, err = is.SkipTo(codec.BYTE, 0, true)
+				err, _ = is.SkipTo(codec.BYTE, 0, true)
 				if err != nil {
 					return err
 				}
@@ -302,7 +301,7 @@ func (u *UniAttribute) doGet(data interface{}, is *codec.Reader) error {
 	case reflect.Slice:
 		fmt.Println("get slice ...")
 
-		have, ty, err := is.SkipToNoCheck(0, false)
+		err, have, ty := is.SkipToNoCheck(0, false)
 		if err != nil {
 			return err
 		}
@@ -314,7 +313,7 @@ func (u *UniAttribute) doGet(data interface{}, is *codec.Reader) error {
 					return err
 				}
 
-				//st.Vf = make([]float32, length)
+				//st.Vf = make([]float32, length, length)
 				//for i0, e0 := int32(0), length; i0 < e0; i0++ {
 				//
 				//	err = _is.Read_float32(&st.Vf[i0], 0, false)

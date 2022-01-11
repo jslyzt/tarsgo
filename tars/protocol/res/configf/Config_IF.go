@@ -56,7 +56,7 @@ func (_obj *Config) ListConfig(App string, Server string, Vf *[]string, _opt ...
 		return ret, err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(3, true)
+	err, _, ty = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -66,7 +66,7 @@ func (_obj *Config) ListConfig(App string, Server string, Vf *[]string, _opt ...
 		if err != nil {
 			return ret, err
 		}
-		(*Vf) = make([]string, length)
+		(*Vf) = make([]string, length, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = _is.Read_string(&(*Vf)[i0], 0, false)
@@ -129,7 +129,7 @@ func (_obj *Config) ListConfigWithContext(ctx context.Context, App string, Serve
 		return ret, err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(3, true)
+	err, _, ty = _is.SkipToNoCheck(3, true)
 	if err != nil {
 		return ret, err
 	}
@@ -139,7 +139,7 @@ func (_obj *Config) ListConfigWithContext(ctx context.Context, App string, Serve
 		if err != nil {
 			return ret, err
 		}
-		(*Vf) = make([]string, length)
+		(*Vf) = make([]string, length, length)
 		for i1, e1 := int32(0), length; i1 < e1; i1++ {
 
 			err = _is.Read_string(&(*Vf)[i1], 0, false)
@@ -208,7 +208,7 @@ func (_obj *Config) LoadConfig(App string, Server string, Filename string, Confi
 		return ret, err
 	}
 
-	err = _is.Read_string(Config, 4, true)
+	err = _is.Read_string(&(*Config), 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -261,7 +261,7 @@ func (_obj *Config) LoadConfigWithContext(ctx context.Context, App string, Serve
 		return ret, err
 	}
 
-	err = _is.Read_string(Config, 4, true)
+	err = _is.Read_string(&(*Config), 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -315,7 +315,7 @@ func (_obj *Config) LoadConfigByHost(AppServerName string, Filename string, Host
 		return ret, err
 	}
 
-	err = _is.Read_string(Config, 4, true)
+	err = _is.Read_string(&(*Config), 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -368,7 +368,7 @@ func (_obj *Config) LoadConfigByHostWithContext(ctx context.Context, AppServerNa
 		return ret, err
 	}
 
-	err = _is.Read_string(Config, 4, true)
+	err = _is.Read_string(&(*Config), 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -422,7 +422,7 @@ func (_obj *Config) CheckConfig(AppServerName string, Filename string, Host stri
 		return ret, err
 	}
 
-	err = _is.Read_string(Result, 4, true)
+	err = _is.Read_string(&(*Result), 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -475,7 +475,7 @@ func (_obj *Config) CheckConfigWithContext(ctx context.Context, AppServerName st
 		return ret, err
 	}
 
-	err = _is.Read_string(Result, 4, true)
+	err = _is.Read_string(&(*Result), 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -519,7 +519,7 @@ func (_obj *Config) ListConfigByInfo(ConfigInfo *ConfigInfo, Vf *[]string, _opt 
 		return ret, err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(2, true)
+	err, _, ty = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -529,7 +529,7 @@ func (_obj *Config) ListConfigByInfo(ConfigInfo *ConfigInfo, Vf *[]string, _opt 
 		if err != nil {
 			return ret, err
 		}
-		(*Vf) = make([]string, length)
+		(*Vf) = make([]string, length, length)
 		for i2, e2 := int32(0), length; i2 < e2; i2++ {
 
 			err = _is.Read_string(&(*Vf)[i2], 0, false)
@@ -587,7 +587,7 @@ func (_obj *Config) ListConfigByInfoWithContext(ctx context.Context, ConfigInfo 
 		return ret, err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(2, true)
+	err, _, ty = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -597,7 +597,7 @@ func (_obj *Config) ListConfigByInfoWithContext(ctx context.Context, ConfigInfo 
 		if err != nil {
 			return ret, err
 		}
-		(*Vf) = make([]string, length)
+		(*Vf) = make([]string, length, length)
 		for i3, e3 := int32(0), length; i3 < e3; i3++ {
 
 			err = _is.Read_string(&(*Vf)[i3], 0, false)
@@ -656,7 +656,7 @@ func (_obj *Config) LoadConfigByInfo(ConfigInfo *ConfigInfo, Config *string, _op
 		return ret, err
 	}
 
-	err = _is.Read_string(Config, 2, true)
+	err = _is.Read_string(&(*Config), 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -699,7 +699,7 @@ func (_obj *Config) LoadConfigByInfoWithContext(ctx context.Context, ConfigInfo 
 		return ret, err
 	}
 
-	err = _is.Read_string(Config, 2, true)
+	err = _is.Read_string(&(*Config), 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -743,7 +743,7 @@ func (_obj *Config) CheckConfigByInfo(ConfigInfo *ConfigInfo, Result *string, _o
 		return ret, err
 	}
 
-	err = _is.Read_string(Result, 2, true)
+	err = _is.Read_string(&(*Result), 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -786,7 +786,7 @@ func (_obj *Config) CheckConfigByInfoWithContext(ctx context.Context, ConfigInfo
 		return ret, err
 	}
 
-	err = _is.Read_string(Result, 2, true)
+	err = _is.Read_string(&(*Result), 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -830,7 +830,7 @@ func (_obj *Config) ListAllConfigByInfo(ConfigInfo *GetConfigListInfo, Vf *[]str
 		return ret, err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(2, true)
+	err, _, ty = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -840,7 +840,7 @@ func (_obj *Config) ListAllConfigByInfo(ConfigInfo *GetConfigListInfo, Vf *[]str
 		if err != nil {
 			return ret, err
 		}
-		(*Vf) = make([]string, length)
+		(*Vf) = make([]string, length, length)
 		for i4, e4 := int32(0), length; i4 < e4; i4++ {
 
 			err = _is.Read_string(&(*Vf)[i4], 0, false)
@@ -898,7 +898,7 @@ func (_obj *Config) ListAllConfigByInfoWithContext(ctx context.Context, ConfigIn
 		return ret, err
 	}
 
-	_, ty, err = _is.SkipToNoCheck(2, true)
+	err, _, ty = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -908,7 +908,7 @@ func (_obj *Config) ListAllConfigByInfoWithContext(ctx context.Context, ConfigIn
 		if err != nil {
 			return ret, err
 		}
-		(*Vf) = make([]string, length)
+		(*Vf) = make([]string, length, length)
 		for i5, e5 := int32(0), length; i5 < e5; i5++ {
 
 			err = _is.Read_string(&(*Vf)[i5], 0, false)

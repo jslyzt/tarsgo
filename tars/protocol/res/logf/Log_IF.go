@@ -314,7 +314,7 @@ func logger(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *codec
 		return err
 	}
 	var Buffer []string
-	_, ty, err = _is.SkipToNoCheck(5, true)
+	err, _, ty = _is.SkipToNoCheck(5, true)
 	if err != nil {
 		return err
 	}
@@ -324,7 +324,7 @@ func logger(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *codec
 		if err != nil {
 			return err
 		}
-		Buffer = make([]string, length)
+		Buffer = make([]string, length, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = _is.Read_string(&Buffer[i0], 0, false)
@@ -373,7 +373,7 @@ func loggerbyInfo(ctx context.Context, _val interface{}, _os *codec.Buffer, _is 
 		return err
 	}
 	var Buffer []string
-	_, ty, err = _is.SkipToNoCheck(2, true)
+	err, _, ty = _is.SkipToNoCheck(2, true)
 	if err != nil {
 		return err
 	}
@@ -383,7 +383,7 @@ func loggerbyInfo(ctx context.Context, _val interface{}, _os *codec.Buffer, _is 
 		if err != nil {
 			return err
 		}
-		Buffer = make([]string, length)
+		Buffer = make([]string, length, length)
 		for i1, e1 := int32(0), length; i1 < e1; i1++ {
 
 			err = _is.Read_string(&Buffer[i1], 0, false)
