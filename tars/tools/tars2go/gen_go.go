@@ -486,6 +486,14 @@ func (gen *GenGo) genStructDefine(st *StructInfo) {
 			idx := strings.Index(v.Desc, "gorm:")
 			if idx >= 0 {
 				sgorm = v.Desc[idx+5:]
+				if len(sgorm) > 0 {
+					if ipos := strings.IndexByte(sgorm, '"'); ipos >= 0 {
+						sgorm = sgorm[ipos+1:]
+					}
+					if ipos := strings.IndexByte(sgorm, '"'); ipos >= 0 {
+						sgorm = sgorm[:ipos]
+					}
+				}
 				if len(scolumn) <= 0 {
 					cidx := strings.Index(sgorm, "\"-\"")
 					if cidx >= 0 {
