@@ -134,31 +134,31 @@ func (u *UniAttribute) Decode(is *codec.Reader) error {
 func (u *UniAttribute) putBase(data interface{}, os *codec.Buffer) error {
 	var err error
 	//os := codec.NewBuffer()
-	switch xdata := data.(type) {
+	switch data.(type) {
 	case int64:
-		err = os.Write_int64(xdata, 0)
+		err = os.Write_int64(data.(int64), 0)
 	case int32:
-		err = os.Write_int32(xdata, 0)
+		err = os.Write_int32(data.(int32), 0)
 	case int16:
-		err = os.Write_int16(xdata, 0)
+		err = os.Write_int16(data.(int16), 0)
 	case int8:
-		err = os.Write_int8(xdata, 0)
+		err = os.Write_int8(data.(int8), 0)
 	case uint32:
-		err = os.Write_uint32(xdata, 0)
+		err = os.Write_uint32(data.(uint32), 0)
 	case uint16:
-		err = os.Write_uint16(xdata, 0)
+		err = os.Write_uint16(data.(uint16), 0)
 	case uint8:
-		err = os.Write_uint8(xdata, 0)
+		err = os.Write_uint8(data.(uint8), 0)
 	case bool:
-		err = os.Write_bool(xdata, 0)
+		err = os.Write_bool(data.(bool), 0)
 	case float64:
-		err = os.Write_float64(xdata, 0)
+		err = os.Write_float64(data.(float64), 0)
 	case float32:
-		err = os.Write_float32(xdata, 0)
+		err = os.Write_float32(data.(float32), 0)
 	case string:
-		err = os.Write_string(xdata, 0)
+		err = os.Write_string(data.(string), 0)
 	case TarsStructIF:
-		err = xdata.WriteBlock(os, 0)
+		err = data.(TarsStructIF).WriteBlock(os, 0)
 	default:
 		err = fmt.Errorf("tup put error: not support type")
 	}
@@ -260,31 +260,31 @@ func (u *UniAttribute) getBase(data interface{}, is *codec.Reader) error {
 	var err error
 	// if v, ok := u._data[k]; ok {
 	// 	is := codec.NewReader(v)
-	switch xdata := (data).(type) {
+	switch (data).(type) {
 	case *int64:
-		err = is.Read_int64(xdata, 0, true)
+		err = is.Read_int64(data.(*int64), 0, true)
 	case *int32:
-		err = is.Read_int32(xdata, 0, true)
+		err = is.Read_int32(data.(*int32), 0, true)
 	case *int16:
-		err = is.Read_int16(xdata, 0, true)
+		err = is.Read_int16(data.(*int16), 0, true)
 	case *int8:
-		err = is.Read_int8(xdata, 0, true)
+		err = is.Read_int8(data.(*int8), 0, true)
 	case *uint32:
-		err = is.Read_uint32(xdata, 0, true)
+		err = is.Read_uint32(data.(*uint32), 0, true)
 	case *uint16:
-		err = is.Read_uint16(xdata, 0, true)
+		err = is.Read_uint16(data.(*uint16), 0, true)
 	case *uint8:
-		err = is.Read_uint8(xdata, 0, true)
+		err = is.Read_uint8(data.(*uint8), 0, true)
 	case *bool:
-		err = is.Read_bool(xdata, 0, true)
+		err = is.Read_bool(data.(*bool), 0, true)
 	case *float64:
-		err = is.Read_float64(xdata, 0, true)
+		err = is.Read_float64(data.(*float64), 0, true)
 	case *float32:
-		err = is.Read_float32(xdata, 0, true)
+		err = is.Read_float32(data.(*float32), 0, true)
 	case *string:
-		err = is.Read_string(xdata, 0, true)
+		err = is.Read_string((data).(*string), 0, true)
 	case TarsStructIF:
-		err = xdata.ReadBlock(is, 0, true)
+		err = data.(TarsStructIF).ReadBlock(is, 0, true)
 	default:
 		err = fmt.Errorf("tup get error: not support type")
 	}

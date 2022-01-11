@@ -43,7 +43,7 @@ endif()
 
 mark_as_advanced(CMAKE_Go_COMPILER)
 
-configure_file(${GOPATH}/src/tarsgo/cmake/CMakeGoCompiler.cmake.in
+configure_file(${GOPATH}/src/github.com/jslyzt/tarsgo/cmake/CMakeGoCompiler.cmake.in
   ${CMAKE_PLATFORM_INFO_DIR}/CMakeGoCompiler.cmake @ONLY)
 
 set(CMAKE_Go_COMPILER_ENV_VAR "GO_COMPILER")

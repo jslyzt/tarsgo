@@ -43,22 +43,13 @@ Please set go mod:
 go env -w GO111MODULE=auto
 ```
 
-cd `$GOPATH`
+install `tars2go`:
 
 ```bash
-go get -u github.com/jslyzt/tarsgo/tars
-```
-
-now tarsgo downloaded to path:
-
-```bash
-$GOPATH/src/tarsgo/
-```
-
-After tarsgo src be downloaded, please install `tars2go`:
-
-```bash
-go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
+# < go 1.17 
+go get -u github.com/jslyzt/tarsgo/tars/tools/tars2go
+# >= go 1.17
+go install github.com/jslyzt/tarsgo/tars/tools/tars2go@latest
 ```
 
 ## Quickstart
@@ -70,7 +61,7 @@ go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
 ## Usage
 ### 1 Server
  - Below is a full example illustrating how to use tarsgo to build a server.
-  
+
 #### 1.1 Interface Definition
 
 Create a tars file, like hello.tars, under `$GOPATH/src` (for example, `$GOPATH/src/TestApp/TestServer/hello.tars`).
@@ -90,7 +81,7 @@ module TestApp
 	
 };	
 ```
-	
+
 
 #### 1.2 Compile Interface Definition File
 
@@ -98,7 +89,10 @@ module TestApp
 If not install `tars2go`, compile and install the `tars2go` tools.
 
 ```bash
-go install $GOPATH/src/github.com/jslyzt/tarsgo/tars/tools/tars2go
+# < go 1.17 
+go get -u github.com/jslyzt/tarsgo/tars/tools/tars2go
+# >= go 1.17
+go install github.com/jslyzt/tarsgo/tars/tools/tars2go@latest
 ```
 
 ##### 1.2.2 Compile the Tars File and Translate into Go File
@@ -542,7 +536,36 @@ func main() {
 ##### 2.4.5 Call by Set
 The client can call server by set through configuration file mentioned. Which enableset will be y and setdivision will set `like gray.sz.*`. See [IDC Set](https://tarscloud.github.io/TarsDocs_en/dev/tars-idc-set.html) for more detail.
 
-If you want to call by set manually, tarsgo will support this feature soon.
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/jslyzt/tarsgo/tars"
+    "TestApp"
+)
+
+var *tars.Communicator
+func main() {
+    comm = tars.NewCommunicator()
+    app := new(TestApp.Hello)
+    obj := "TestApp.HelloGo.SayHelloObj"
+    comm.SetProperty("locator", "tars.tarsregistry.QueryObj@tcp -h ... -p ...")
+    comm.SetProperty("enableset", true)
+    comm.SetProperty("setdivision", "gray.sz.*")
+    
+    var req string="Hello Wold"
+    var res string
+    ret, err := app.TestHello(req, &out)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }   
+    fmt.Println(ret, res)
+}
+```
+
+
 
 ##### 2.4.6. Hash Call
 Since multiple servers can be deployed, client requests are randomly distributed to the server, but in some cases, certain requests should be always sent to a particular server. In this case, Tars provides a simple way to achieve which is called hash-call. Tarsgo Has supported this feature In version v1.1.5.
@@ -940,4 +963,4 @@ func ZipkinClientFilter() tars.ClientFilter {
 
 The server will add filters, which exact the span context from the request package's status and start a new span.
 
-Read more under `github.com/jslyzt/tarsgo/tars/plugin/zipkintracing`. For client-side and server-side example code, read `ZipkinTraceClient` & `ZipkinTraceServer` under the examples.
+Read more under `TarsGo/tars/plugin/zipkintracing`. For client-side and server-side example code, read `ZipkinTraceClient` & `ZipkinTraceServer` under the examples.

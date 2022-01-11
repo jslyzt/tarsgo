@@ -75,7 +75,8 @@ func bWriteU8(w *bytes.Buffer, data uint8) error {
 //go:nosplit
 func bWriteU16(w *bytes.Buffer, data uint16) error {
 	var b [2]byte
-	bs := b[:]
+	var bs []byte
+	bs = b[:]
 	binary.BigEndian.PutUint16(bs, data)
 	_, err := w.Write(bs)
 	return err
@@ -84,7 +85,8 @@ func bWriteU16(w *bytes.Buffer, data uint16) error {
 //go:nosplit
 func bWriteU32(w *bytes.Buffer, data uint32) error {
 	var b [4]byte
-	bs := b[:]
+	var bs []byte
+	bs = b[:]
 	binary.BigEndian.PutUint32(bs, data)
 	_, err := w.Write(bs)
 	return err
@@ -93,7 +95,8 @@ func bWriteU32(w *bytes.Buffer, data uint32) error {
 //go:nosplit
 func bWriteU64(w *bytes.Buffer, data uint64) error {
 	var b [8]byte
-	bs := b[:]
+	var bs []byte
+	bs = b[:]
 	binary.BigEndian.PutUint64(bs, data)
 	_, err := w.Write(bs)
 	return err
@@ -109,7 +112,8 @@ func bReadU8(r *bytes.Reader, data *uint8) error {
 //go:nosplit
 func bReadU16(r *bytes.Reader, data *uint16) error {
 	var b [2]byte
-	bs := b[:]
+	var bs []byte
+	bs = b[:]
 	_, err := r.Read(bs)
 	*data = binary.BigEndian.Uint16(bs)
 	return err
@@ -118,7 +122,8 @@ func bReadU16(r *bytes.Reader, data *uint16) error {
 //go:nosplit
 func bReadU32(r *bytes.Reader, data *uint32) error {
 	var b [4]byte
-	bs := b[:]
+	var bs []byte
+	bs = b[:]
 	_, err := r.Read(bs)
 	*data = binary.BigEndian.Uint32(bs)
 	return err
@@ -127,7 +132,8 @@ func bReadU32(r *bytes.Reader, data *uint32) error {
 //go:nosplit
 func bReadU64(r *bytes.Reader, data *uint64) error {
 	var b [8]byte
-	bs := b[:]
+	var bs []byte
+	bs = b[:]
 	_, err := r.Read(bs)
 	*data = binary.BigEndian.Uint64(bs)
 	return err
@@ -436,16 +442,22 @@ func (b *Reader) skipField(ty byte) error {
 	switch ty {
 	case BYTE:
 		b.Skip(1)
+		break
 	case SHORT:
 		b.Skip(2)
+		break
 	case INT:
 		b.Skip(4)
+		break
 	case LONG:
 		b.Skip(8)
+		break
 	case FLOAT:
 		b.Skip(4)
+		break
 	case DOUBLE:
 		b.Skip(8)
+		break
 	case STRING1:
 		data, err := b.buf.ReadByte()
 		if err != nil {
@@ -453,6 +465,7 @@ func (b *Reader) skipField(ty byte) error {
 		}
 		l := int(data)
 		b.Skip(l)
+		break
 	case STRING4:
 		var l uint32
 		err := bReadU32(b.buf, &l)
@@ -460,26 +473,31 @@ func (b *Reader) skipField(ty byte) error {
 			return err
 		}
 		b.Skip(int(l))
+		break
 	case MAP:
 		err := b.skipFieldMap()
 		if err != nil {
 			return err
 		}
+		break
 	case LIST:
 		err := b.skipFieldList()
 		if err != nil {
 			return err
 		}
+		break
 	case SIMPLE_LIST:
 		err := b.skipFieldSimpleList()
 		if err != nil {
 			return err
 		}
+		break
 	case STRUCT_BEGIN:
 		err := b.SkipToStructEnd()
 		if err != nil {
 			return err
 		}
+		break
 	case STRUCT_END:
 		break
 	case ZERO_TAG:
