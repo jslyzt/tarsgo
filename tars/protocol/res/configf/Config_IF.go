@@ -208,7 +208,7 @@ func (_obj *Config) LoadConfig(App string, Server string, Filename string, Confi
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Config), 4, true)
+	err = _is.Read_string(Config, 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -261,7 +261,7 @@ func (_obj *Config) LoadConfigWithContext(ctx context.Context, App string, Serve
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Config), 4, true)
+	err = _is.Read_string(Config, 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -315,7 +315,7 @@ func (_obj *Config) LoadConfigByHost(AppServerName string, Filename string, Host
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Config), 4, true)
+	err = _is.Read_string(Config, 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -368,7 +368,7 @@ func (_obj *Config) LoadConfigByHostWithContext(ctx context.Context, AppServerNa
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Config), 4, true)
+	err = _is.Read_string(Config, 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -422,7 +422,7 @@ func (_obj *Config) CheckConfig(AppServerName string, Filename string, Host stri
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Result), 4, true)
+	err = _is.Read_string(Result, 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -475,7 +475,7 @@ func (_obj *Config) CheckConfigWithContext(ctx context.Context, AppServerName st
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Result), 4, true)
+	err = _is.Read_string(Result, 4, true)
 	if err != nil {
 		return ret, err
 	}
@@ -656,7 +656,7 @@ func (_obj *Config) LoadConfigByInfo(ConfigInfo *ConfigInfo, Config *string, _op
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Config), 2, true)
+	err = _is.Read_string(Config, 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -699,7 +699,7 @@ func (_obj *Config) LoadConfigByInfoWithContext(ctx context.Context, ConfigInfo 
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Config), 2, true)
+	err = _is.Read_string(Config, 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -743,7 +743,7 @@ func (_obj *Config) CheckConfigByInfo(ConfigInfo *ConfigInfo, Result *string, _o
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Result), 2, true)
+	err = _is.Read_string(Result, 2, true)
 	if err != nil {
 		return ret, err
 	}
@@ -786,7 +786,7 @@ func (_obj *Config) CheckConfigByInfoWithContext(ctx context.Context, ConfigInfo
 		return ret, err
 	}
 
-	err = _is.Read_string(&(*Result), 2, true)
+	err = _is.Read_string(Result, 2, true)
 	if err != nil {
 		return ret, err
 	}

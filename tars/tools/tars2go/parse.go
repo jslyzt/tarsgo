@@ -132,6 +132,7 @@ type Parse struct {
 	ProtoName string
 
 	DependModuleWithJce map[string]bool
+	fileNames           map[string]bool
 }
 
 func (p *Parse) parseErr(err string) {
@@ -583,11 +584,40 @@ func (p *Parse) parseModule() {
 	p.expect(tkName)
 
 	if p.Module != "" {
-		p.parseErr("do not repeat define module")
+		// 解决一个tars文件中定义多个module
+		name := p.ProtoName + "_" + p.t.S.S + ".tars"
+		newp := newParse(name, nil, nil)
+		newp.IncChain = p.IncChain
+		newp.lex = p.lex
+		newp.Include = p.Include
+		newp.IncParse = p.IncParse
+		cowp := *p
+		newp.IncParse = append(newp.IncParse, &cowp)
+		newp.Module = p.t.S.S
+		newp.parseModuleSegment()
+		newp.analyzeDepend()
+		if p.fileNames[name] {
+			// merge
+			for _, incParse := range p.IncParse {
+				if incParse.ProtoName == newp.ProtoName {
+					incParse.Struct = append(incParse.Struct, newp.Struct...)
+					incParse.Interface = append(incParse.Interface, newp.Interface...)
+					incParse.Enum = append(incParse.Enum, newp.Enum...)
+					incParse.Const = append(incParse.Const, newp.Const...)
+					incParse.HashKey = append(incParse.HashKey, newp.HashKey...)
+					break
+				}
+			}
+		} else {
+			// 增加已经解析的module
+			p.IncParse = append(p.IncParse, newp)
+			p.fileNames[name] = true
+		}
+		p.lex = newp.lex
+	} else {
+		p.Module = p.t.S.S
+		p.parseModuleSegment()
 	}
-	p.Module = p.t.S.S
-
-	p.parseModuleSegment()
 }
 
 func (p *Parse) parseInclude() {
@@ -818,11 +848,25 @@ func newParse(s string, b []byte, incChain []string) *Parse {
 	fmt.Println(s, p.IncChain)
 
 	p.lex = NewLexState(s, b)
+	p.fileNames = map[string]bool{}
 	return p
 }
 
 //ParseFile parse a file,return grammer tree.
 func ParseFile(path string, incChain []string) *Parse {
+	/*
+		if _, err := os.Stat(path); os.IsNotExist(err) {
+			// 查找tars文件路径
+			for _, include := range includes {
+				include = strings.TrimRight(include, "/")
+				filePath := include + "/" + path
+				if _, err = os.Stat(filePath); err == nil {
+					path = filePath
+					break
+				}
+			}
+		}
+	*/
 	b, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Println("file read error: " + path + ". " + err.Error())

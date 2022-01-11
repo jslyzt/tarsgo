@@ -164,6 +164,7 @@ func setMap(l int, res *requestf.ResponsePacket, ctx map[string]string, sts map[
 type _impPropertyF interface {
 	ReportPropMsg(Statmsg map[StatPropMsgHead]StatPropMsgBody) (ret int32, err error)
 }
+
 type _impPropertyFWithContext interface {
 	ReportPropMsg(ctx context.Context, Statmsg map[StatPropMsgHead]StatPropMsgBody) (ret int32, err error)
 }

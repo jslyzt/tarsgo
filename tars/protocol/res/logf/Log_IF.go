@@ -362,6 +362,7 @@ func logger(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *codec
 	_ = ty
 	return nil
 }
+
 func loggerbyInfo(ctx context.Context, _val interface{}, _os *codec.Buffer, _is *codec.Reader, withContext bool) (err error) {
 	var length int32
 	var have bool

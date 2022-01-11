@@ -2,9 +2,10 @@ package base
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/spf13/cobra"
-	"strings"
 )
 
 func GetArgs(cmd *cobra.Command, args []string) (app, server, servant, goModuleName string, err error) {
