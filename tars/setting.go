@@ -48,8 +48,8 @@ const (
 	ObjQueueMax int32 = 100000
 
 	//log
-	defaultRotateN      = 10
-	defaultRotateSizeMB = 100
+	//defaultRotateN      = 10
+	//defaultRotateSizeMB = 100
 
 	//remotelog
 
@@ -58,7 +58,7 @@ const (
 	//remoteLogMaxNumOneTime is the max logs for reporting in one time.
 	remoteLogMaxNumOneTime int = 2000
 	//remoteLogInterval log report interval, defaultvalue is 1000 milliseconds
-	remoteLogInterval time.Duration = 1000 * time.Millisecond
+	//remoteLogInterval time.Duration = 1000 * time.Millisecond
 
 	//report
 

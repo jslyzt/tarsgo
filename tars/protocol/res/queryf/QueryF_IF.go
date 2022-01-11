@@ -57,7 +57,7 @@ func (_obj *QueryF) FindObjectById(Id string, _opt ...map[string]string) (ret []
 		if err != nil {
 			return ret, err
 		}
-		ret = make([]endpointf.EndpointF, length, length)
+		ret = make([]endpointf.EndpointF, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = ret[i0].ReadBlock(_is, 0, false)
@@ -120,7 +120,7 @@ func (_obj *QueryF) FindObjectByIdWithContext(ctx context.Context, Id string, _o
 		if err != nil {
 			return ret, err
 		}
-		ret = make([]endpointf.EndpointF, length, length)
+		ret = make([]endpointf.EndpointF, length)
 		for i1, e1 := int32(0), length; i1 < e1; i1++ {
 
 			err = ret[i1].ReadBlock(_is, 0, false)
@@ -189,7 +189,7 @@ func (_obj *QueryF) FindObjectById4Any(Id string, ActiveEp *[]endpointf.Endpoint
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i2, e2 := int32(0), length; i2 < e2; i2++ {
 
 			err = (*ActiveEp)[i2].ReadBlock(_is, 0, false)
@@ -219,7 +219,7 @@ func (_obj *QueryF) FindObjectById4Any(Id string, ActiveEp *[]endpointf.Endpoint
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i3, e3 := int32(0), length; i3 < e3; i3++ {
 
 			err = (*InactiveEp)[i3].ReadBlock(_is, 0, false)
@@ -287,7 +287,7 @@ func (_obj *QueryF) FindObjectById4AnyWithContext(ctx context.Context, Id string
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i4, e4 := int32(0), length; i4 < e4; i4++ {
 
 			err = (*ActiveEp)[i4].ReadBlock(_is, 0, false)
@@ -317,7 +317,7 @@ func (_obj *QueryF) FindObjectById4AnyWithContext(ctx context.Context, Id string
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i5, e5 := int32(0), length; i5 < e5; i5++ {
 
 			err = (*InactiveEp)[i5].ReadBlock(_is, 0, false)
@@ -386,7 +386,7 @@ func (_obj *QueryF) FindObjectById4All(Id string, ActiveEp *[]endpointf.Endpoint
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i6, e6 := int32(0), length; i6 < e6; i6++ {
 
 			err = (*ActiveEp)[i6].ReadBlock(_is, 0, false)
@@ -416,7 +416,7 @@ func (_obj *QueryF) FindObjectById4All(Id string, ActiveEp *[]endpointf.Endpoint
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i7, e7 := int32(0), length; i7 < e7; i7++ {
 
 			err = (*InactiveEp)[i7].ReadBlock(_is, 0, false)
@@ -484,7 +484,7 @@ func (_obj *QueryF) FindObjectById4AllWithContext(ctx context.Context, Id string
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i8, e8 := int32(0), length; i8 < e8; i8++ {
 
 			err = (*ActiveEp)[i8].ReadBlock(_is, 0, false)
@@ -514,7 +514,7 @@ func (_obj *QueryF) FindObjectById4AllWithContext(ctx context.Context, Id string
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i9, e9 := int32(0), length; i9 < e9; i9++ {
 
 			err = (*InactiveEp)[i9].ReadBlock(_is, 0, false)
@@ -583,7 +583,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroup(Id string, ActiveEp *[]endpointf.E
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i10, e10 := int32(0), length; i10 < e10; i10++ {
 
 			err = (*ActiveEp)[i10].ReadBlock(_is, 0, false)
@@ -613,7 +613,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroup(Id string, ActiveEp *[]endpointf.E
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i11, e11 := int32(0), length; i11 < e11; i11++ {
 
 			err = (*InactiveEp)[i11].ReadBlock(_is, 0, false)
@@ -681,7 +681,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroupWithContext(ctx context.Context, Id
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i12, e12 := int32(0), length; i12 < e12; i12++ {
 
 			err = (*ActiveEp)[i12].ReadBlock(_is, 0, false)
@@ -711,7 +711,7 @@ func (_obj *QueryF) FindObjectByIdInSameGroupWithContext(ctx context.Context, Id
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i13, e13 := int32(0), length; i13 < e13; i13++ {
 
 			err = (*InactiveEp)[i13].ReadBlock(_is, 0, false)
@@ -785,7 +785,7 @@ func (_obj *QueryF) FindObjectByIdInSameStation(Id string, SStation string, Acti
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i14, e14 := int32(0), length; i14 < e14; i14++ {
 
 			err = (*ActiveEp)[i14].ReadBlock(_is, 0, false)
@@ -815,7 +815,7 @@ func (_obj *QueryF) FindObjectByIdInSameStation(Id string, SStation string, Acti
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i15, e15 := int32(0), length; i15 < e15; i15++ {
 
 			err = (*InactiveEp)[i15].ReadBlock(_is, 0, false)
@@ -888,7 +888,7 @@ func (_obj *QueryF) FindObjectByIdInSameStationWithContext(ctx context.Context, 
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i16, e16 := int32(0), length; i16 < e16; i16++ {
 
 			err = (*ActiveEp)[i16].ReadBlock(_is, 0, false)
@@ -918,7 +918,7 @@ func (_obj *QueryF) FindObjectByIdInSameStationWithContext(ctx context.Context, 
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i17, e17 := int32(0), length; i17 < e17; i17++ {
 
 			err = (*InactiveEp)[i17].ReadBlock(_is, 0, false)
@@ -992,7 +992,7 @@ func (_obj *QueryF) FindObjectByIdInSameSet(Id string, SetId string, ActiveEp *[
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i18, e18 := int32(0), length; i18 < e18; i18++ {
 
 			err = (*ActiveEp)[i18].ReadBlock(_is, 0, false)
@@ -1022,7 +1022,7 @@ func (_obj *QueryF) FindObjectByIdInSameSet(Id string, SetId string, ActiveEp *[
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i19, e19 := int32(0), length; i19 < e19; i19++ {
 
 			err = (*InactiveEp)[i19].ReadBlock(_is, 0, false)
@@ -1095,7 +1095,7 @@ func (_obj *QueryF) FindObjectByIdInSameSetWithContext(ctx context.Context, Id s
 		if err != nil {
 			return ret, err
 		}
-		(*ActiveEp) = make([]endpointf.EndpointF, length, length)
+		(*ActiveEp) = make([]endpointf.EndpointF, length)
 		for i20, e20 := int32(0), length; i20 < e20; i20++ {
 
 			err = (*ActiveEp)[i20].ReadBlock(_is, 0, false)
@@ -1125,7 +1125,7 @@ func (_obj *QueryF) FindObjectByIdInSameSetWithContext(ctx context.Context, Id s
 		if err != nil {
 			return ret, err
 		}
-		(*InactiveEp) = make([]endpointf.EndpointF, length, length)
+		(*InactiveEp) = make([]endpointf.EndpointF, length)
 		for i21, e21 := int32(0), length; i21 < e21; i21++ {
 
 			err = (*InactiveEp)[i21].ReadBlock(_is, 0, false)

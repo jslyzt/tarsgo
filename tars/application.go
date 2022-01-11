@@ -32,7 +32,8 @@ import (
 var tarsConfig map[string]*transport.TarsServerConf
 var goSvrs map[string]*transport.TarsServer
 var httpSvrs map[string]*http.Server
-var listenFds []*os.File
+
+//var listenFds []*os.File
 var shutdown chan bool
 var serList []string
 var objRunList []string

@@ -61,7 +61,7 @@ func (st *ResponsePacket) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err, have, ty = _is.SkipToNoCheck(6, true)
+	err, _, ty = _is.SkipToNoCheck(6, true)
 	if err != nil {
 		return err
 	}
@@ -71,7 +71,7 @@ func (st *ResponsePacket) ReadFrom(_is *codec.Reader) error {
 		if err != nil {
 			return err
 		}
-		st.SBuffer = make([]int8, length, length)
+		st.SBuffer = make([]int8, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = _is.Read_int8(&st.SBuffer[i0], 0, false)
@@ -100,7 +100,7 @@ func (st *ResponsePacket) ReadFrom(_is *codec.Reader) error {
 		}
 	}
 
-	err, have = _is.SkipTo(codec.MAP, 7, true)
+	err, _ = _is.SkipTo(codec.MAP, 7, true)
 	if err != nil {
 		return err
 	}

@@ -41,7 +41,7 @@ func (st *NotifyInfo) ReadFrom(_is *codec.Reader) error {
 		if err != nil {
 			return err
 		}
-		st.NotifyItems = make([]NotifyItem, length, length)
+		st.NotifyItems = make([]NotifyItem, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
 			err = st.NotifyItems[i0].ReadBlock(_is, 0, false)

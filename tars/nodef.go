@@ -22,10 +22,10 @@ func (n *NodeFHelper) SetNodeInfo(comm *Communicator, node string, app string, s
 	n.sf = new(nodef.ServerF)
 	comm.StringToProxy(node, n.sf)
 	n.si = nodef.ServerInfo{
-		app,
-		server,
-		int32(os.Getpid()),
-		"",
+		Application: app,
+		ServerName:  server,
+		Pid:         int32(os.Getpid()),
+		Adapter:     "",
 		//"tars",
 		//container,
 	}
