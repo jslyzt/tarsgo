@@ -101,6 +101,18 @@ func genForHead(vc string) string {
 	return ` for ` + i + `,` + e + ` := int32(0),length;` + i + `<` + e + `;` + i + `++ `
 }
 
+func genPrefixKey(prefix, key string) string {
+	if len(prefix) <= 0 {
+		if len(key) >= 2 && key[0:2] == "(*" && !strings.Contains(key, "[") && key[len(key)-1:] == ")" {
+			key = key[2:]
+			key = key[0 : len(key)-1]
+			return key
+		}
+		return "&" + key
+	}
+	return "&" + prefix + key
+}
+
 // === rename area ===
 // 0. rename module
 func (p *Parse) rename() {
@@ -757,7 +769,7 @@ err, _ = _is.SkipTo(codec.BYTE, 0, true)
 ` + errStr + `
 err = _is.Read_int32(&length, 0, true)
 ` + errStr + `
-err = _is.Read_slice_` + unsign + `int8(&` + prefix + mb.Key + `, length, true)
+err = _is.Read_slice_` + unsign + `int8(` + genPrefixKey(prefix, mb.Key) + `, length, true)
 ` + errStr + `
 `)
 }
@@ -946,7 +958,7 @@ func (gen *GenGo) genReadVar(v *StructMember, prefix string, hasRet bool) {
 				require = "true"
 			}
 			c.WriteString(`
-err = _is.Read_int32((*int32)(&` + prefix + v.Key + `),` + tag + `, ` + require + `)
+err = _is.Read_int32((*int32)(` + genPrefixKey(prefix, v.Key) + `),` + tag + `, ` + require + `)
 ` + errString(hasRet) + `
 `)
 		} else {
@@ -959,7 +971,7 @@ err = _is.Read_int32((*int32)(&` + prefix + v.Key + `),` + tag + `, ` + require 
 			require = "true"
 		}
 		c.WriteString(`
-err = _is.Read_` + gen.genType(v.Type) + `(&` + prefix + v.Key + `, ` + tag + `, ` + require + `)
+err = _is.Read_` + gen.genType(v.Type) + `(` + genPrefixKey(prefix, v.Key) + `, ` + tag + `, ` + require + `)
 ` + errString(hasRet) + `
 `)
 	}
@@ -1522,7 +1534,7 @@ func (gen *GenGo) genSwitchCase(tname string, fun *FunInfo) {
 		_decoder_.UseNumber()
 		err = _decoder_.Decode(&_jsonDat_)
 		if err != nil {
-			return fmt.Errorf("Decode reqpacket failed, error: %+v", err)
+			return fmt.Errorf("decode reqpacket failed, error: %+v", err)
 		}
 		`)
 
@@ -1544,7 +1556,7 @@ func (gen *GenGo) genSwitchCase(tname string, fun *FunInfo) {
 
 		c.WriteString(`
 		} else {
-			err = fmt.Errorf("Decode reqpacket fail, error version: %d", tarsReq.IVersion)
+			err = fmt.Errorf("decode reqpacket fail, error version: %d", tarsReq.IVersion)
 			return err
 		}`)
 
