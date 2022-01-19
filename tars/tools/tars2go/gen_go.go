@@ -507,14 +507,7 @@ func (gen *GenGo) genStructDefine(st *StructInfo) {
 					}
 				}
 				if len(scolumn) <= 0 {
-					cidx := strings.Index(sgorm, "\"-\"")
-					if cidx >= 0 {
-						scolumn = "-"
-					}
-				}
-				if len(scolumn) <= 0 {
-					cidx := strings.Index(sgorm, "embedded")
-					if cidx >= 0 {
+					if sgorm == "-" || strings.Contains(sgorm, "embedded") {
 						scolumn = "-"
 					}
 				}
