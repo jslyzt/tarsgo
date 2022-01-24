@@ -506,10 +506,8 @@ func (gen *GenGo) genStructDefine(st *StructInfo) {
 						sgorm = sgorm[:ipos]
 					}
 				}
-				if len(scolumn) <= 0 {
-					if sgorm == "-" || strings.Contains(sgorm, "embedded") {
-						scolumn = "-"
-					}
+				if len(scolumn) <= 0 && strings.Contains(sgorm, "embedded") {
+					scolumn = "-"
 				}
 				if len(scolumn) <= 0 {
 					cidx := strings.Index(sgorm, "column:")
