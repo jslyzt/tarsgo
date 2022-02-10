@@ -105,11 +105,11 @@ func (c *AdapterProxy) Recv(pkg []byte) {
 
 // Send : Send packet
 func (c *AdapterProxy) Send(req *requestf.RequestPacket) error {
-	TLOG.Debug("send req:", req.IRequestId)
+	//TLOG.Debug("send req:", req.IRequestId)
 	c.sendAdd()
 	sbuf, err := c.obj.proto.RequestPack(req)
 	if err != nil {
-		TLOG.Debug("protocol wrong:", req.IRequestId)
+		TLOG.Error("protocol wrong:", req.IRequestId, err)
 		return err
 	}
 	return c.tarsClient.Send(sbuf)

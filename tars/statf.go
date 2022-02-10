@@ -80,7 +80,7 @@ func (s *StatFHelper) reportAndClear(mStat string, bFromClient bool) {
 	if mStat == "mStatInfo" {
 		_, err := s.sf.ReportMicMsg(s.mStatInfo, bFromClient)
 		if err != nil {
-			TLOG.Debug("mStatInfo report err:", err.Error())
+			TLOG.Error("mStatInfo report err:", err.Error())
 		}
 		s.mStatInfo = make(map[statf.StatMicMsgHead]statf.StatMicMsgBody)
 		s.mStatCount = make(map[statf.StatMicMsgHead]int)
@@ -89,7 +89,7 @@ func (s *StatFHelper) reportAndClear(mStat string, bFromClient bool) {
 	if mStat == "mStatInfoFromServer" {
 		_, err := s.sf.ReportMicMsg(s.mStatInfoFromServer, bFromClient)
 		if err != nil {
-			TLOG.Debug("mStatInfoFromServer report err:", err.Error())
+			TLOG.Error("mStatInfoFromServer report err:", err.Error())
 		}
 		s.mStatInfoFromServer = make(map[statf.StatMicMsgHead]statf.StatMicMsgBody)
 		s.mStatCountFromServer = make(map[statf.StatMicMsgHead]int)

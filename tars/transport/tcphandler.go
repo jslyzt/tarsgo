@@ -125,7 +125,7 @@ func (h *tcpHandler) Handle() error {
 			fd, _ := conn.File()
 			defer fd.Close()
 			key := fmt.Sprintf("%v", fd.Fd())
-			TLOG.Debugf("TCP accept: %s, %d, fd: %s", conn.RemoteAddr(), os.Getpid(), key)
+			//TLOG.Debugf("TCP accept: %s, %d, fd: %s", conn.RemoteAddr(), os.Getpid(), key)
 			conn.SetReadBuffer(cfg.TCPReadBuffer)
 			conn.SetWriteBuffer(cfg.TCPWriteBuffer)
 			conn.SetNoDelay(cfg.TCPNoDelay)
@@ -158,7 +158,7 @@ func (h *tcpHandler) sendCloseMsg() {
 		conn := val.(*connInfo)
 		conn.conn.SetReadDeadline(time.Now())
 		// send a reconnect-message
-		TLOG.Debugf("send close message to %v", conn.conn.RemoteAddr())
+		//TLOG.Debugf("send close message to %v", conn.conn.RemoteAddr())
 		conn.writeLock.Lock()
 		conn.conn.Write(closeMsg)
 		conn.writeLock.Unlock()
@@ -170,7 +170,7 @@ func (h *tcpHandler) sendCloseMsg() {
 func (h *tcpHandler) CloseIdles(n int64) bool {
 	if atomic.LoadInt32(&h.isListenClosed) == 0 {
 		// hack: create new connection to avoid acceptTCP hanging
-		TLOG.Debugf("Hack msg to %s", h.conf.Address)
+		//TLOG.Debugf("Hack msg to %s", h.conf.Address)
 		if conn, err := net.Dial("tcp", h.conf.Address); err == nil {
 			conn.Close()
 		}
@@ -183,7 +183,7 @@ func (h *tcpHandler) CloseIdles(n int64) bool {
 	allClosed := true
 	h.conns.Range(func(key, val interface{}) bool {
 		conn := val.(*connInfo)
-		TLOG.Debugf("num invoke %d %v", atomic.LoadInt32(&conn.numInvoke), conn.idleTime+n > time.Now().Unix())
+		//TLOG.Debugf("num invoke %d %v", atomic.LoadInt32(&conn.numInvoke), conn.idleTime+n > time.Now().Unix())
 		if atomic.LoadInt32(&conn.numInvoke) > 0 || conn.idleTime+n > time.Now().Unix() {
 			allClosed = false
 		}
@@ -203,7 +203,7 @@ func (h *tcpHandler) recv(connSt *connInfo) {
 				break
 			}
 		}
-		TLOG.Debugf("Close connection: %v", conn.RemoteAddr())
+		//TLOG.Debugf("Close connection: %v", conn.RemoteAddr())
 		conn.Close()
 
 		ctx := h.getConnContext(connSt)

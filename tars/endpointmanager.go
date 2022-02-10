@@ -129,7 +129,6 @@ func (g *globalManager) updateEndpoints() {
 			if err != nil {
 				TLOG.Errorf("update endpoint error, %s.", e.objName)
 			}
-
 		}
 
 		//cache to file
@@ -205,12 +204,12 @@ func newTarsEndpointManager(objName string, comm *Communicator) *tarsEndpointMan
 		e.activeEpHashMap = chmap
 	} else {
 		//[proxy] TODO singleton
-		TLOG.Debug("proxy mode:", objName)
+		//TLOG.Debug("proxy mode:", objName)
 		e.objName = objName
 		e.directproxy = false
 		obj, _ := e.comm.GetProperty("locator")
 		e.locator = new(queryf.QueryF)
-		TLOG.Debug("string to proxy locator ", obj)
+		//TLOG.Debug("string to proxy locator ", obj)
 		e.comm.StringToProxy(obj, e.locator)
 		e.checkAdapter = make(chan *AdapterProxy, 1000)
 	}
@@ -395,7 +394,7 @@ func (e *tarsEndpointManager) findAndSetObj(q *queryf.QueryF) error {
 		TLOG.Errorf("findAndSetObj %s, empty of active endpoint", e.objName)
 		return nil
 	}
-	TLOG.Debugf("findAndSetObj|call FindObjectById ok, obj: %s, ret: %d, active: %v, inative: %v", e.objName, ret, activeEp, inactiveEp)
+	//TLOG.Debugf("findAndSetObj|call FindObjectById ok, obj: %s, ret: %d, active: %v, inative: %v", e.objName, ret, activeEp, inactiveEp)
 
 	newEps := make([]endpoint.Endpoint, len(activeEp))
 	for i, ep := range activeEp {
@@ -423,7 +422,7 @@ func (e *tarsEndpointManager) findAndSetObj(q *queryf.QueryF) error {
 		if !flagActive && !flagInactive {
 			value.(*AdapterProxy).Close()
 			e.epList.Delete(key)
-			TLOG.Debugf("findAndSetObj|delete useless endpoint from epList: %+v", key)
+			//TLOG.Debugf("findAndSetObj|delete useless endpoint from epList: %+v", key)
 		}
 		return true
 	})
@@ -458,6 +457,6 @@ func (e *tarsEndpointManager) findAndSetObj(q *queryf.QueryF) error {
 	e.activeEpHashMap = chmap
 	e.epLock.Unlock()
 
-	TLOG.Debugf("findAndSetObj|activeEp: %+v", sortedEps)
+	//TLOG.Debugf("findAndSetObj|activeEp: %+v", sortedEps)
 	return nil
 }

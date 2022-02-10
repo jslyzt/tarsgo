@@ -107,7 +107,7 @@ func (s *ServantProxy) Tars_invoke(ctx context.Context, ctype byte,
 	var msgType int32
 	dyeingKey, ok := current.GetDyeingKey(ctx)
 	if ok {
-		TLOG.Debug("dyeing debug: find dyeing key:", dyeingKey)
+		//TLOG.Debug("dyeing debug: find dyeing key:", dyeingKey)
 		if status == nil {
 			status = make(map[string]string)
 		}
@@ -243,9 +243,9 @@ func (s *ServantProxy) doInvoke(ctx context.Context, msg *Message, timeout time.
 				return errors.New(msg.Resp.SResultDesc)
 			}
 		} else {
-			TLOG.Debug("recv nil Resp, close of the readCh?")
+			TLOG.Error("recv nil Resp, close of the readCh?")
 		}
-		TLOG.Debug("recv msg succ ", msg.Req.IRequestId)
+		//TLOG.Debug("recv msg succ ", msg.Req.IRequestId)
 	}
 	return nil
 }

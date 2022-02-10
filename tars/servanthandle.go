@@ -24,14 +24,14 @@ func addServantCommon(v dispatch, f interface{}, obj string, withContext bool) {
 	cfg, ok := tarsConfig[obj]
 	if !ok {
 		ReportNotifyInfo(NOTIFY_ERROR, "servant obj name not found:"+obj)
-		TLOG.Debug("servant obj name not found:", obj)
+		TLOG.Error("servant obj name not found:", obj)
 		panic(ok)
 	}
 	if v, ok := f.(destroyableImp); ok {
-		TLOG.Debugf("add destroyable obj %s", obj)
+		//TLOG.Debugf("add destroyable obj %s", obj)
 		destroyableObjs = append(destroyableObjs, v)
 	}
-	TLOG.Debug("add:", cfg)
+	//TLOG.Debug("add:", cfg)
 
 	jp := NewTarsProtocol(v, f, withContext)
 	s := transport.NewTarsServer(jp, cfg)
@@ -48,7 +48,7 @@ func AddHttpServantWithExceptionStatusChecker(mux *TarsHttpMux, obj string, exce
 	cfg, ok := tarsConfig[obj]
 	if !ok {
 		ReportNotifyInfo(NOTIFY_ERROR, "servant obj name not found:"+obj)
-		TLOG.Debug("servant obj name not found:", obj)
+		TLOG.Error("servant obj name not found:", obj)
 		panic(ok)
 	}
 	TLOG.Debug("add http server:", cfg)
@@ -79,10 +79,10 @@ func AddServantWithProtocol(proto transport.ServerProtocol, obj string) {
 	cfg, ok := tarsConfig[obj]
 	if !ok {
 		ReportNotifyInfo(NOTIFY_ERROR, "servant obj name not found:"+obj)
-		TLOG.Debug("servant obj name not found ", obj)
+		TLOG.Error("servant obj name not found ", obj)
 		panic(ok)
 	}
-	TLOG.Debug("add:", cfg)
+	//TLOG.Debug("add:", cfg)
 	s := transport.NewTarsServer(proto, cfg)
 	goSvrs[obj] = s
 }

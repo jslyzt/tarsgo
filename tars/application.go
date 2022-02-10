@@ -235,7 +235,7 @@ func initConfig() {
 		}
 		tarsConfig[svrObj] = conf
 	}
-	TLOG.Debug("config add ", tarsConfig)
+	//TLOG.Debug("config add ", tarsConfig)
 
 	if len(svrCfg.Local) > 0 {
 		localpoint := endpoint.Parse(svrCfg.Local)
@@ -323,7 +323,7 @@ func Run() {
 			teerDown(fmt.Errorf("obj not found %s", obj))
 			break
 		}
-		TLOG.Debugf("Run %s  %+v", obj, s.GetConfig())
+		//TLOG.Debugf("Run %s  %+v", obj, s.GetConfig())
 		lisDone.Add(1)
 		go func(obj string) {
 			if err := s.Listen(); err != nil {

@@ -41,7 +41,7 @@ func (n *NotifyHelper) SetNotifyInfo(comm *Communicator, notify string, app stri
 func (n *NotifyHelper) ReportNotifyInfo(level int32, info string) {
 	n.tm.ELevel = notifyf.NOTIFYLEVEL(level)
 	n.tm.SMessage = info
-	TLOG.Debug(n.tm)
+	//TLOG.Debug(n.tm)
 	n.tn.ReportNotifyInfo(&n.tm)
 }
 
@@ -59,7 +59,7 @@ func ReportNotifyInfo(level int32, info string) {
 	ha.SetNotifyInfo(comm, notify, app, server, container)
 	defer func() {
 		if err := recover(); err != nil {
-			TLOG.Debug(err)
+			TLOG.Error(err)
 		}
 	}()
 	ha.ReportNotifyInfo(level, info)
