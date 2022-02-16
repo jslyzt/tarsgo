@@ -123,7 +123,7 @@ func (g *globalManager) updateEndpoints() {
 			}
 		}
 		g.mlock.Unlock()
-		TLOG.Debugf("start refresh %d endpoints %d", len(eps), g.refreshInterval)
+		//TLOG.Debugf("start refresh %d endpoints %d", len(eps), g.refreshInterval)
 		for _, e := range eps {
 			err := e.doFresh()
 			if err != nil {

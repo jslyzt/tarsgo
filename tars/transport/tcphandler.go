@@ -240,7 +240,7 @@ func (h *tcpHandler) recv(connSt *connInfo) {
 				continue
 			}
 			if err == io.EOF {
-				TLOG.Debug("connection closed by remote:", conn.RemoteAddr())
+				//TLOG.Debug("connection closed by remote:", conn.RemoteAddr())
 			} else {
 				TLOG.Error("read package error:", reflect.TypeOf(err), err)
 			}

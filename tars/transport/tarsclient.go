@@ -156,7 +156,7 @@ func (c *connection) recv(conn net.Conn, connDone chan bool) {
 				return // connection is closed
 			}
 			if err == io.EOF {
-				TLOG.Debugf("connection closed by remote: %v, error: %v", conn.RemoteAddr(), err)
+				//TLOG.Debugf("connection closed by remote: %v, error: %v", conn.RemoteAddr(), err)
 			} else {
 				TLOG.Error("read package error:", err)
 			}
@@ -191,7 +191,7 @@ func (c *connection) recv(conn net.Conn, connDone chan bool) {
 func (c *connection) ReConnect() (err error) {
 	c.connLock.Lock()
 	if c.isClosed {
-		TLOG.Debug("Connect:", c.tc.address)
+		//TLOG.Debug("Connect:", c.tc.address)
 		c.conn, err = net.DialTimeout(c.tc.conf.Proto, c.tc.address, c.dialTimeout)
 
 		if err != nil {
