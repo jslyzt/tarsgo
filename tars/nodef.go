@@ -26,8 +26,6 @@ func (n *NodeFHelper) SetNodeInfo(comm *Communicator, node string, app string, s
 		ServerName:  server,
 		Pid:         int32(os.Getpid()),
 		Adapter:     "",
-		//"tars",
-		//container,
 	}
 }
 

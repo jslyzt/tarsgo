@@ -38,6 +38,9 @@ var shutdown chan bool
 var serList []string
 var objRunList []string
 var isShudowning int32
+var clientObjInfo map[string]map[string]string
+var clientTlsConfig *tls.Config
+var clientObjTlsConfig map[string]*tls.Config
 
 // TLOG is the logger for tars framework.
 var TLOG = rogger.GetLogger("TLOG")
@@ -59,6 +62,8 @@ func init() {
 	httpSvrs = make(map[string]*http.Server)
 	shutdown = make(chan bool, 1)
 	adminMethods = make(map[string]adminFn)
+	clientObjInfo = make(map[string]map[string]string)
+	clientObjTlsConfig = make(map[string]*tls.Config)
 	rogger.SetLevel(rogger.ERROR)
 }
 
@@ -66,6 +71,13 @@ func init() {
 var ServerConfigPath string
 
 func initConfig() {
+	defer func() {
+		go func() {
+			_ = statInitOnce.Do(initReport)
+		}()
+	}()
+	svrCfg = newServerConfig()
+	cltCfg = newClientConfig()
 	if ServerConfigPath == "" {
 		svrFlag := flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
 		svrFlag.StringVar(&ServerConfigPath, "config", "", "server config path")
@@ -83,8 +95,7 @@ func initConfig() {
 	}
 
 	//Config.go
-	//Server
-	svrCfg = new(serverConfig)
+	//init server config
 	if strings.EqualFold(c.GetString("/tars/application<enableset>"), "Y") {
 		svrCfg.Enableset = true
 		svrCfg.Setdivision = c.GetString("/tars/application<setdivision>")
@@ -137,7 +148,7 @@ func initConfig() {
 	svrCfg.WriteTimeout = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/server<writetimeout>", WriteTimeout))
 	svrCfg.HandleTimeout = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/server<handletimeout>", HandleTimeout))
 	svrCfg.IdleTimeout = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/server<idletimeout>", IdleTimeout))
-	svrCfg.ZombileTimeout = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/server<zombiletimeout>", ZombileTimeout))
+	svrCfg.ZombieTimeout = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/server<zombietimeout>", ZombieTimeout))
 	svrCfg.QueueCap = c.GetIntWithDef("/tars/application/server<queuecap>", QueueCap)
 	svrCfg.GracedownTimeout = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/server<gracedowntimeout>", GracedownTimeout))
 
@@ -169,16 +180,17 @@ func initConfig() {
 		}
 	}
 
-	//client
-	cltCfg = new(clientConfig)
+	//init client config
 	cMap := c.GetMap("/tars/application/client")
 	cltCfg.Locator = cMap["locator"]
 	cltCfg.Stat = cMap["stat"]
 	cltCfg.Property = cMap["property"]
+	cltCfg.ModuleName = cMap["modulename"]
 	cltCfg.AsyncInvokeTimeout = c.GetIntWithDef("/tars/application/client<async-invoke-timeout>", AsyncInvokeTimeout)
 	cltCfg.RefreshEndpointInterval = c.GetIntWithDef("/tars/application/client<refresh-endpoint-interval>", refreshEndpointInterval)
 	cltCfg.ReportInterval = c.GetIntWithDef("/tars/application/client<report-interval>", reportInterval)
 	cltCfg.CheckStatusInterval = c.GetIntWithDef("/tars/application/client<check-status-interval>", checkStatusInterval)
+	cltCfg.KeepAliveInterval = c.GetIntWithDef("/tars/application/client<keep-alive-interval>", keepAliveInverval)
 
 	// add client timeout
 	cltCfg.ClientQueueLen = c.GetIntWithDef("/tars/application/client<clientqueuelen>", ClientQueueLen)
@@ -190,6 +202,16 @@ func initConfig() {
 	cltCfg.ObjQueueMax = c.GetInt32WithDef("/tars/application/client<objqueuemax>", ObjQueueMax)
 	cltCfg.AdapterProxyTicker = tools.ParseTimeOut(c.GetIntWithDef("/tars/application/client<adapterproxyticker>", AdapterProxyTicker))
 	cltCfg.AdapterProxyResetCount = c.GetIntWithDef("/tars/application/client<adapterproxyresetcount>", AdapterProxyResetCount)
+	ca := c.GetString("/tars/application/client<ca>")
+	if ca != "" {
+		cert := c.GetString("/tars/application/client<cert>")
+		key := c.GetString("/tars/application/client<key>")
+		ciphers := c.GetString("/tars/application/client<ciphers>")
+		clientTlsConfig, err = ssl.NewClientTlsConfig(ca, cert, key, ciphers)
+		if err != nil {
+			panic(err)
+		}
+	}
 
 	serList = c.GetDomain("/tars/application/server")
 	for _, adapter := range serList {
@@ -259,7 +281,26 @@ func initConfig() {
 		RegisterAdmin(rogger.Admin, rogger.HandleDyeingAdmin)
 	}
 
-	go initReport()
+	auths := c.GetDomain("/tars/application/client")
+	for _, objName := range auths {
+		authInfo := make(map[string]string)
+		//authInfo["accesskey"] = c.GetString("/tars/application/client/" + objName + "<accesskey>")
+		//authInfo["secretkey"] = c.GetString("/tars/application/client/" + objName + "<secretkey>")
+		authInfo["ca"] = c.GetString("/tars/application/client/" + objName + "<ca>")
+		authInfo["cert"] = c.GetString("/tars/application/client/" + objName + "<cert>")
+		authInfo["key"] = c.GetString("/tars/application/client/" + objName + "<key>")
+		authInfo["ciphers"] = c.GetString("/tars/application/client/" + objName + "<ciphers>")
+		clientObjInfo[objName] = authInfo
+
+		if authInfo["ca"] != "" {
+			var objTlsConfig *tls.Config
+			objTlsConfig, err = ssl.NewClientTlsConfig(authInfo["ca"], authInfo["cert"], authInfo["key"], authInfo["ciphers"])
+			if err != nil {
+				panic(err)
+			}
+			clientObjTlsConfig[objName] = objTlsConfig
+		}
+	}
 }
 
 // Run the application
@@ -520,7 +561,7 @@ func mainloop() {
 					continue
 				}
 				if s, ok := goSvrs[adapter.Obj]; ok {
-					if !s.IsZombie(GetServerConfig().ZombileTimeout) {
+					if !s.IsZombie(GetServerConfig().ZombieTimeout) {
 						ha.KeepAlive(name)
 					}
 				}

@@ -5,6 +5,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
+	"reflect"
 
 	"github.com/jslyzt/tarsgo/tars/util/rogger"
 )
@@ -124,4 +125,12 @@ func ReadPEMData(pemFile string, pemPass []byte) ([]byte, error) {
 		pemData = pem.EncodeToMemory(&newBlock)
 	}
 	return pemData, nil
+}
+
+func FDFromTLSConn(conn *tls.Conn) uintptr {
+	tcpConn := reflect.Indirect(reflect.ValueOf(conn)).FieldByName("conn").Elem().Elem()
+	fdVal := tcpConn.FieldByName("fd")
+	pfdVal := reflect.Indirect(fdVal).FieldByName("pfd")
+
+	return uintptr(pfdVal.FieldByName("Sysfd").Int())
 }

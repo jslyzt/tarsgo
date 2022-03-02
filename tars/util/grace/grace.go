@@ -23,17 +23,16 @@ func init() {
 // if there is no inherited fd, create a now one.
 func CreateListener(proto string, addr string) (net.Listener, error) {
 	key := fmt.Sprintf("%s_%s_%s", InheritFdPrefix, proto, addr)
-	val := os.Getenv(key)
-	for val != "" {
+	if val := os.Getenv(key); val != "" {
 		fd, err := strconv.Atoi(val)
 		if err != nil {
-			break
+			return nil, err
 		}
 		file := os.NewFile(uintptr(fd), "listener")
 		ln, err := net.FileListener(file)
 		if err != nil {
 			file.Close()
-			break
+			return nil, err
 		}
 		allListenFds.Store(key, ln)
 		return ln, nil
@@ -51,16 +50,15 @@ func CreateListener(proto string, addr string) (net.Listener, error) {
 func CreateUDPConn(addr string) (*net.UDPConn, error) {
 	proto := "udp"
 	key := fmt.Sprintf("%s_%s_%s", InheritFdPrefix, proto, addr)
-	val := os.Getenv(key)
-	for val != "" {
+	if val := os.Getenv(key); val != "" {
 		fd, err := strconv.Atoi(val)
 		if err != nil {
-			break
+			return nil, err
 		}
 		file := os.NewFile(uintptr(fd), "listener")
 		conn, err := net.FileConn(file)
 		if err != nil {
-			break
+			return nil, err
 		}
 		file.Close()
 		udpConn := conn.(*net.UDPConn)

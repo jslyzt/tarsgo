@@ -153,7 +153,7 @@ func (g *globalManager) updateEndpoints() {
 // tarsEndpointManager is a struct which contains endpoint information.
 type tarsEndpointManager struct {
 	objName     string // name only, no ip list
-	directproxy bool
+	directProxy bool
 	comm        *Communicator
 	locator     *queryf.QueryF
 
@@ -189,7 +189,7 @@ func newTarsEndpointManager(objName string, comm *Communicator) *tarsEndpointMan
 		//[direct]
 		e.objName = objName[0:pos]
 		endpoints := objName[pos+1:]
-		e.directproxy = true
+		e.directProxy = true
 		ends := strings.Split(endpoints, ":")
 		eps := make([]endpoint.Endpoint, len(ends))
 		for i, end := range ends {
@@ -206,7 +206,7 @@ func newTarsEndpointManager(objName string, comm *Communicator) *tarsEndpointMan
 		//[proxy] TODO singleton
 		//TLOG.Debug("proxy mode:", objName)
 		e.objName = objName
-		e.directproxy = false
+		e.directProxy = false
 		obj, _ := e.comm.GetProperty("locator")
 		e.locator = new(queryf.QueryF)
 		//TLOG.Debug("string to proxy locator ", obj)
@@ -232,7 +232,12 @@ func (e *tarsEndpointManager) checkStatus() {
 	for _, ef := range e.activeEpf {
 		ep := endpoint.Tars2endpoint(ef)
 		if v, ok := e.epList.Load(ep.Key); ok {
-			firstTime, needCheck := v.(*AdapterProxy).checkActive()
+			adp := v.(*AdapterProxy)
+			if e.comm.Client.KeepAliveInterval > 0 {
+				adp.doKeepAlive()
+			}
+
+			firstTime, needCheck := adp.checkActive()
 			if !firstTime && !needCheck {
 				continue
 			}
@@ -247,7 +252,7 @@ func (e *tarsEndpointManager) checkStatus() {
 				}
 				e.epLock.Unlock()
 
-				e.activeEpHashMap.Remove(ep.Key)
+				e.activeEpHashMap.Remove(ep)
 			}
 
 			if needCheck {
@@ -280,10 +285,10 @@ func (e *tarsEndpointManager) SelectAdapterProxy(msg *Message) (*AdapterProxy, b
 	eps := e.activeEp[:]
 	e.epLock.Unlock()
 
-	if e.directproxy && len(eps) == 0 {
+	if e.directProxy && len(eps) == 0 {
 		return nil, false
 	}
-	if !e.directproxy && len(e.activeEpf) == 0 {
+	if !e.directProxy && len(e.activeEpf) == 0 {
 		return nil, false
 	}
 	select {
@@ -301,7 +306,7 @@ func (e *tarsEndpointManager) SelectAdapterProxy(msg *Message) (*AdapterProxy, b
 				adp = v.(*AdapterProxy)
 			} else {
 				epf := endpoint.Endpoint2tars(ep)
-				adp = NewAdapterProxy(&epf, e.comm)
+				adp = NewAdapterProxy(e.objName, &epf, e.comm)
 				e.epList.Store(ep.Key, adp)
 			}
 		}
@@ -319,12 +324,12 @@ func (e *tarsEndpointManager) SelectAdapterProxy(msg *Message) (*AdapterProxy, b
 				adp = v.(*AdapterProxy)
 			} else {
 				epf := endpoint.Endpoint2tars(ep)
-				adp = NewAdapterProxy(&epf, e.comm)
+				adp = NewAdapterProxy(e.objName, &epf, e.comm)
 				e.epList.Store(ep.Key, adp)
 			}
 		}
 	}
-	if adp == nil && !e.directproxy {
+	if adp == nil && !e.directProxy {
 		//No any node is alive ,just select a random one.
 		randomIndex := rand.Intn(len(e.activeEpf))
 		randomEpf := e.activeEpf[randomIndex]
@@ -332,7 +337,7 @@ func (e *tarsEndpointManager) SelectAdapterProxy(msg *Message) (*AdapterProxy, b
 		if v, ok := e.epList.Load(randomEp.Key); ok {
 			adp = v.(*AdapterProxy)
 		} else {
-			adp = NewAdapterProxy(&randomEpf, e.comm)
+			adp = NewAdapterProxy(e.objName, &randomEpf, e.comm)
 			e.epList.Store(randomEp.Key, adp)
 		}
 	}
@@ -340,7 +345,7 @@ func (e *tarsEndpointManager) SelectAdapterProxy(msg *Message) (*AdapterProxy, b
 }
 
 func (e *tarsEndpointManager) doFresh() error {
-	if e.directproxy {
+	if e.directProxy {
 		return nil
 	}
 	e.freshLock.Lock()

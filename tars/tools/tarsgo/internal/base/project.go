@@ -9,6 +9,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/fatih/color"
+	"github.com/mitchellh/go-homedir"
 )
 
 // Project is a project template.
@@ -28,7 +29,7 @@ func NewProject(app, server, servant, goModuleName string) *Project {
 	}
 }
 
-// New new a project from remote repo.
+// Create a project from remote repo.
 func (p *Project) Create(ctx context.Context, dir string, layout string, branch string, demoDir string) error {
 	to := path.Join(dir, p.Server)
 	if _, err := os.Stat(to); !os.IsNotExist(err) {
@@ -48,8 +49,10 @@ func (p *Project) Create(ctx context.Context, dir string, layout string, branch 
 		os.RemoveAll(to)
 	}
 
-	if err := GoInstall("github.com/jslyzt/tarsgo/tars/tools/tars2go"); err != nil {
-		return err
+	if !IsExistTars2go() {
+		if err := GoInstall("github.com/jslyzt/tarsgo/tars/tools/tars2go"); err != nil {
+			return err
+		}
 	}
 
 	fmt.Printf("🚀 Creating server %s.%s, layout repo is %s, please wait a moment.\n\n", p.App, p.Server, layout)
@@ -84,4 +87,16 @@ func (p *Project) Create(ctx context.Context, dir string, layout string, branch 
 	fmt.Println("🤝 Thanks for using TarsGo")
 	fmt.Println("📚 Tutorial: https://tarscloud.github.io/TarsDocs/")
 	return nil
+}
+
+func IsExistTars2go() bool {
+	tars2goPath, err := homedir.Expand("~/go/bin/tars2go")
+	if err != nil {
+		return false
+	}
+	_, err = os.Stat(tars2goPath)
+	if err != nil {
+		return os.IsExist(err)
+	}
+	return true
 }

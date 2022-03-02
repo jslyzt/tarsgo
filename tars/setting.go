@@ -11,7 +11,7 @@ const (
 	//for now ,some option should update from remote config
 
 	//TarsVersion is tars version
-	TarsVersion string = "1.1.2"
+	TarsVersion string = "1.1.9"
 
 	//server
 
@@ -25,13 +25,19 @@ const (
 	HandleTimeout = 0
 	//IdleTimeout idle timeout,defaultvalue is 600000 milliseconds
 	IdleTimeout = 600000
-	//ZombileTimeout zombile timeout,defaultvalue is 10000 milliseconds
-	ZombileTimeout = 10000
+	// ZombieTimeout zombie timeout,defaultvalue is 10000 milliseconds
+	ZombieTimeout = 10000
 	//QueueCap queue gap
 	QueueCap int = 10000000
 
 	//client
 
+	// Stat default value
+	Stat = "tars.tarsstat.StatObj"
+	// Property default value
+	Property = "tars.tarsproperty.PropertyObj"
+	// ModuleName default value
+	ModuleName = "tup_client"
 	//ClientQueueLen client queue length
 	ClientQueueLen int = 10000
 	//ClientIdleTimeout client idle timeout,defaultvalue is 600000 milliseconds
@@ -48,8 +54,8 @@ const (
 	ObjQueueMax int32 = 100000
 
 	//log
-	//defaultRotateN      = 10
-	//defaultRotateSizeMB = 100
+	defaultRotateN      = 10
+	defaultRotateSizeMB = 100
 
 	//remotelog
 
@@ -89,6 +95,9 @@ const (
 
 	//check endpoint status every 1000 ms
 	checkStatusInterval int = 1000
+
+	// adapter proxy keepAvlie with server ,defaultvalue is 0 means close keepAlive. milliseconds
+	keepAliveInverval int = 0
 
 	//try interval after every 30s
 	tryTimeInterval int64 = 30
